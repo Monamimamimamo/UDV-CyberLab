@@ -22,7 +22,7 @@ sudo systemctl enable jenkins
 
 ### 2. Клонирование проекта
 ```bash
-git clone https://github.com/1vanRybin/UDV-CyberLab.git
+git clone https://github.com/Monamimamimamo/UDV-CyberLab.git
 cd UDV-CyberLab
 ```
 
@@ -39,7 +39,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ### 4. Создание Pipeline Job
 1. Создаём новый Pipeline job
 2. В "Pipeline" выбираем "Pipeline script from SCM"
-3. Выбираем Git и указываем URL репозитория, ветка */main
+3. Выбираем Git и указываем URL репозитория
 4. В "Script Path" указываем `Jenkinsfile`
 
 ### 5. Добавление Credentials
