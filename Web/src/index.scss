@@ -1,0 +1,13 @@
+html, body {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: content-box !important;
+}
