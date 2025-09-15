@@ -13,7 +13,6 @@ services:
     environment:
       - ConnectionStrings__DefaultConnection=User ID=postgres;Password=123;Host=db;Port=5432;Database=identityNEOLab;Pooling=true;
       - ASPNETCORE_ENVIRONMENT=Development
-      - DOTNET_ENVIRONMENT=Development
     networks:
       - database
     restart: always
@@ -29,6 +28,7 @@ services:
         condition: service_healthy
     environment:
       - ConnectionStrings__DefaultConnection=User ID=postgres;Password=123;Host=tests-db;Port=5432;Database=testsNEOLab;Pooling=true;
+      - ASPNETCORE_ENVIRONMENT=Development
     networks:
       - database
     restart: always
@@ -44,6 +44,7 @@ services:
         condition: service_healthy
     environment:
       - ConnectionStrings__DefaultConnection=User ID=postgres;Password=123;Host=projects-db;Port=5432;Database=projectsNEOLab;Pooling=true;
+      - ASPNETCORE_ENVIRONMENT=Development
       - YandexStorage__BucketName=${YANDEX_BUCKET_NAME}
       - YandexStorage__ServiceUrl=${YANDEX_SERVICE_URL}
       - YandexStorage__AccessKey=${YANDEX_ACCESS_KEY}
