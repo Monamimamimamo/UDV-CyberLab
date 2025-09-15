@@ -55,6 +55,7 @@ pipeline {
 
         stage('Build and Deploy') {
             environment {
+                ASPNETCORE_ENVIRONMENT = "Development"
                 YC_BUCKET = "${YANDEX_BUCKET_NAME}"
                 YC_SERVICE_URL = "${YANDEX_SERVICE_URL}"
                 YC_ACCESS_KEY = "${YANDEX_ACCESS_KEY}"
@@ -63,7 +64,8 @@ pipeline {
             steps {
                 sh '''
                 cd /UDV-CyberLab
-                    docker-compose up -d --build
+                echo "ASPNETCORE_ENVIRONMENT = $ASPNETCORE_ENVIRONMENT"
+                   docker-compose up -d --build
                 '''
             }
         }
