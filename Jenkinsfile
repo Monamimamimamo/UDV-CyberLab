@@ -72,7 +72,8 @@ pipeline {
             steps {
                 sh '''
                     cd /UDV-CyberLab
-                    sudo cp nginx/nginx.conf /etc/nginx/sites-available/${DOMAIN}
+                    sed 's/\${DOMAIN}/'${DOMAIN}'/g' nginx/nginx.conf > /tmp/nginx.conf
+                    sudo cp /tmp/nginx.conf /etc/nginx/sites-available/${DOMAIN}
                     sudo ln -sf /etc/nginx/sites-available/${DOMAIN} /etc/nginx/sites-enabled/
                     sudo rm -f /etc/nginx/sites-enabled/default
                     sudo nginx -t
