@@ -7,11 +7,10 @@ namespace Infrastructure
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
         }
 
         public DbSet<Test?> Tests { get; set; }
-        public DbSet<QuestionBase> Questions { get; set; }  
+        public DbSet<QuestionBase> Questions { get; set; }
         public DbSet<QuestionCompliance> QuestionCompliances { get; set; }
         public DbSet<QuestionFile> QuestionFiles { get; set; }
         public DbSet<QuestionOpen> QuestionOpens { get; set; }
@@ -22,7 +21,7 @@ namespace Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<QuestionBase>()
-                .HasDiscriminator<string>("QuestionType") 
+                .HasDiscriminator<string>("QuestionType")
                 .HasValue<QuestionCompliance>("Compliance")
                 .HasValue<QuestionFile>("File")
                 .HasValue<QuestionOpen>("Open")
