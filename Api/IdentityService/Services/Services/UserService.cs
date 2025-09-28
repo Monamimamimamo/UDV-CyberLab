@@ -16,6 +16,18 @@ namespace Services.Services
             _userStore = userStore;
         }
 
+        public async Task<bool> IsEmailConfirmedAsync(User user)
+        {
+            return await _userStore.IsEmailConfirmedAsync(user);
+        }
+
+        public async Task<string> GenerateEmailConfirmationTokenAsync(User user)
+        {
+            var token = await _userStore.GenerateEmailConfirmationTokenAsync(user);
+
+            return token;
+        }
+
         public async Task<IdentityResult> RegisterUserAsync(User user, string password, UserRole role)
         {
             var createResult = await user.CreateAsync(_userStore, password, role.ToString());
@@ -29,11 +41,35 @@ namespace Services.Services
             return token;
         }
 
-        public async Task<User> GetUserInfoAsync(Guid userId)
+        public async Task<User?> GetUserInfoAsync(Guid userId)
         {
             var user = await _userStore.GetInfoAsync(userId);
 
             return user;
+        }
+
+        public async Task<User?> FindUserByEmail(string email)
+        {
+            var user = await _userStore.FindUserByEmail(email);
+
+            return user;
+        }
+
+        public async Task<string> GeneratePasswordResetTokenAsync(User user)
+        {
+            var token = await _userStore.GeneratePasswordResetTokenAsync(user);
+
+            return token;
+        }
+
+        public Task<IdentityResult> ConfirmEmailAsync(User user, string token)
+        {
+            return _userStore.ConfirmEmailAsync(user, token);
+        }
+
+        public Task<IdentityResult> ResetPasswordAsync(User user, string token, string newPassword)
+        {
+            return  _userStore.ResetPasswordAsync(user, token, newPassword);
         }
 
         public async Task<List<User>> GetUsersAsync(string? name)

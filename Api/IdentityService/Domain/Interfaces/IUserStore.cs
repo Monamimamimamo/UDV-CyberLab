@@ -10,8 +10,14 @@ public interface IUserStore
     Task<List<User>> GetByPageAsync(int page);
     Task<User?> CheckExistAsync(Guid id);
     Task<JwtSecurityToken?> LoginAsync(User userLogin, string password);
-    Task<User> GetInfoAsync(Guid userId);
+    Task<User?> GetInfoAsync(Guid userId);
     Task<IdentityResult> DeleteAsync(User user);
     Task<User?> FindByIdAsync(Guid userId);
     Task<List<User>> SearchByFilter(string? name);
+    Task<string> GenerateEmailConfirmationTokenAsync(User user);
+    Task<string> GeneratePasswordResetTokenAsync(User user);
+    Task<User?> FindUserByEmail(string email);
+    Task<bool> IsEmailConfirmedAsync(User user);
+    Task<IdentityResult> ConfirmEmailAsync(User user, string token);
+    Task<IdentityResult> ResetPasswordAsync(User user, string token, string newPassword);
 }

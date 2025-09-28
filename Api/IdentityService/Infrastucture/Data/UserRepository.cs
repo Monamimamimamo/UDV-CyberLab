@@ -22,6 +22,20 @@ public class UserRepository : IUserStore
         _userManager = userManager;
     }
 
+    public async Task<string> GenerateEmailConfirmationTokenAsync(User user)
+    {
+        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+        return token;
+    }
+
+    public async Task<string> GeneratePasswordResetTokenAsync(User user)
+    {
+        var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+        return token;
+    }
+
     public async Task<IdentityResult> CreateAsync(User user, string password, string userRole)
     {
         await using var transaction = await _dbContext.Database.BeginTransactionAsync();
@@ -59,7 +73,7 @@ public class UserRepository : IUserStore
         return token;
     }
 
-    public async Task<User> GetInfoAsync(Guid userId)
+    public async Task<User?> GetInfoAsync(Guid userId)
     {
         var user = await _userManager.FindByIdAsync(userId.ToString());
         if (user is null)
@@ -159,5 +173,25 @@ public class UserRepository : IUserStore
             .ToListAsync();
 
         return usersWithRoles;
+    }
+
+    public async Task<User?> FindUserByEmail(string email)
+    {
+        return await _userManager.FindByEmailAsync(email);
+    }
+
+    public async Task<bool> IsEmailConfirmedAsync(User user)
+    {
+        return await _userManager.IsEmailConfirmedAsync(user);
+    }
+
+    public Task<IdentityResult> ConfirmEmailAsync(User user, string token)
+    {
+        return _userManager.ConfirmEmailAsync(user, token);
+    }
+
+    public Task<IdentityResult> ResetPasswordAsync(User user, string token, string newPassword)
+    {
+        return _userManager.ResetPasswordAsync(user, token, newPassword);
     }
 }
