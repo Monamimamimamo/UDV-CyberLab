@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Data;
 using CRM.Data.Common.Exceptions;
 using Domain.DTO;
 using Domain.Entities;
@@ -30,6 +31,7 @@ public class ProjectService(
         card.DocumentationPath =
             await _fileManager.CreateAsync(documentation, projectDirectory, $"documentation_{card.Name}");
         card.OwnerId = ownerId;
+        card.CreatedAt = DateTime.UtcNow;
 
         var cardId = await _projectRepository.CreateAsync(card.Id, card);
 

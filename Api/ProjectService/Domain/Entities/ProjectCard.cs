@@ -16,5 +16,6 @@ namespace Domain.Entities
         public required string DocumentationPath { get; set; }
         public int ViewsCount { get; set; }
         public int CommentsCount { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

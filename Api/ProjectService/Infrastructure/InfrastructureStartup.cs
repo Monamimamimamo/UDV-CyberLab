@@ -1,5 +1,6 @@
 ﻿using Amazon.Runtime;
 using Amazon.S3;
+using Core.Data;
 using Domain.Interfaces;
 using ExampleCore.AuthOptions;
 using Infrastructure;

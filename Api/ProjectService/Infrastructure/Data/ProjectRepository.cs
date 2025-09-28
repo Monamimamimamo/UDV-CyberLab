@@ -22,6 +22,7 @@ public class ProjectRepository(ProjectsDbContext context) : BaseRepository(conte
             SortOrder.ByViews => query.OrderByDescending(p => p.ViewsCount),
             SortOrder.ByNameAsc => query.OrderBy(p => p.Name),
             SortOrder.ByNameDesc => query.OrderByDescending(p => p.Name),
+            SortOrder.ByCreationDate => query.OrderBy(p=>p.CreatedAt),
             _ => query.OrderByDescending(p => p.Rating)
         };
 
