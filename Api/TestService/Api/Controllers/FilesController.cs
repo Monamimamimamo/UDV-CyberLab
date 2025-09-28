@@ -1,0 +1,27 @@
+﻿using Core.Data;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Api.Controllers
+{
+    namespace Api.Controllers
+    {
+        [Route("api/[controller]")]
+        [ApiController]
+        public class FilesController(IFileManager _fileManager) : ControllerBase
+        {
+            [HttpGet("file")]
+            public async Task<IActionResult> GetFile(Guid id)
+            {
+                try
+                {
+                    var file = await _fileManager.GetFileWithMimeTypeAsync(Path.Combine("Questions", id.ToString()));
+                    return Ok(file);
+                }
+                catch (FileNotFoundException ex)
+                {
+                    return NotFound(ex.Message);
+                }
+            }
+        }
+    }
+}

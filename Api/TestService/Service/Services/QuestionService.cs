@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Data;
 using Domain.DTO.Questions;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -12,15 +13,18 @@ public class QuestionService : IQuestionService
     private readonly IStandartStore _repository;
     private readonly IQuestionStore _questionRepository;
     private readonly IMapper _mapper;
+    private readonly IFileManager _fileManager;
 
     public QuestionService(
         IStandartStore repository,
         IQuestionStore questionRepository,
-        IMapper mapper)
+        IMapper mapper,
+        IFileManager fileManager)
     {
         _repository = repository;
         _questionRepository = questionRepository;
         _mapper = mapper;
+        _fileManager = fileManager;
     }
 
     public async Task<IQuestionBase> GetByIdAsync(Guid questionId)

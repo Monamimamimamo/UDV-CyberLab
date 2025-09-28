@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Data;
 using Domain.DTO.Questions;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -15,11 +16,16 @@ public class QuestionsController : ControllerBase
 {
     private readonly IQuestionService _questionService;
     private readonly IMapper _mapper;
+    private readonly IFileManager _fileManager;
 
-    public QuestionsController(IQuestionService questionService, IMapper mapper)
+    public QuestionsController(
+        IQuestionService questionService,
+        IMapper mapper,
+        IFileManager fileManager)
     {
         _questionService = questionService;
         _mapper = mapper;
+        _fileManager = fileManager;
     }
 
 
@@ -75,6 +81,7 @@ public class QuestionsController : ControllerBase
     {
         var question = _mapper.Map<QuestionFile>(questionDto);
         var questionId = await _questionService.CreateAsync(question);
+        await _fileManager.CreateAsync(questionDto.InputFile, "Questions", questionId.ToString());
 
         return Created(
             $"/api/Questions/{questionId}",
