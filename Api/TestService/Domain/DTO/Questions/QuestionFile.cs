@@ -6,7 +6,7 @@ namespace Domain.Entities
 {
     public record QuestionFileDto : QuestionBaseDto
     {
-        [AllowedExtensions([".png", ".jpg", ".jpeg"])]
+        [AllowedExtensions([".jpg"])]
         public IFormFile InputFile { get; set; }
     }
 }

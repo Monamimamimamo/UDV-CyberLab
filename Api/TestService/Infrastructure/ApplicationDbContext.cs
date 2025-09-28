@@ -7,6 +7,7 @@ namespace Infrastructure
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public DbSet<Test?> Tests { get; set; }

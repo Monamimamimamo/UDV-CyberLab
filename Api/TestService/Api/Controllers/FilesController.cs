@@ -14,7 +14,7 @@ namespace Api.Controllers
             {
                 try
                 {
-                    var file = await _fileManager.GetFileWithMimeTypeAsync(Path.Combine("Questions", id.ToString()));
+                    var file = await _fileManager.GetFileWithMimeTypeAsync($"Questions/{id.ToString()}.jpg");
                     return Ok(file);
                 }
                 catch (FileNotFoundException ex)

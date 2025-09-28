@@ -77,7 +77,7 @@ public class QuestionsController : ControllerBase
     [HttpPost("file")]
     [ProducesResponseType(typeof(QuestionFileDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateFileQuestion([FromBody] QuestionFileDto questionDto)
+    public async Task<IActionResult> CreateFileQuestion([FromForm] QuestionFileDto questionDto)
     {
         var question = _mapper.Map<QuestionFile>(questionDto);
         var questionId = await _questionService.CreateAsync(question);
