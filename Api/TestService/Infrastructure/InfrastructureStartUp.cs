@@ -1,10 +1,11 @@
-﻿using Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Infrastucture.Data;
+﻿using Core.Data;
 using Domain.Interfaces;
+using Infrastructure;
 using Infrastructure.Data;
+using Infrastucture.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Service.interfaces;
 
@@ -17,6 +18,7 @@ public static class InfrastuctureStartUp
         serviceCollection.TryAddScoped<IQuestionStore, QuestionRepository>();
         serviceCollection.TryAddScoped<IUserAnswerRepository, UserAnswerRepository>();
         serviceCollection.TryAddScoped<IUserTestRepository, UserTestRepository>();
+        serviceCollection.TryAddScoped<IFileManager, FileManager>();
 
         var connectionString = configurationManager.GetConnectionString("DefaultConnection");
 

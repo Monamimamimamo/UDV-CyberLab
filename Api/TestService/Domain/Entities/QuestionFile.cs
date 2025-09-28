@@ -2,6 +2,6 @@
 {
     public record QuestionFile : QuestionBase
     {
-        public string InputFile { get; set; }
+        public string InputFilePath { get; set; }
     }
 }

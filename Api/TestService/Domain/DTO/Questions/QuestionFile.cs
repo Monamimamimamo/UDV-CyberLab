@@ -1,9 +1,12 @@
-﻿using Domain.DTO.Questions;
+﻿using Core.ValidateAttributes.Files;
+using Domain.DTO.Questions;
+using Microsoft.AspNetCore.Http;
 
 namespace Domain.Entities
 {
     public record QuestionFileDto : QuestionBaseDto
     {
-        public string InputFile { get; set; }
+        [AllowedExtensions([".png", ".jpg", ".jpeg"])]
+        public IFormFile InputFile { get; set; }
     }
 }
