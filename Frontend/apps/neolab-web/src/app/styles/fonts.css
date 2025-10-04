@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'W3-ip';
+  src: url('/src/shared/assets/fonts/w3-ip.woff2') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}

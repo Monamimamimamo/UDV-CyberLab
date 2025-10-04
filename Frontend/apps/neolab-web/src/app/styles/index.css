@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+@plugin './hero.ts';
+@source '../../../../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+@config "../../../tailwind.config.js";
+
+@import './fonts.css';
+
+/* TODO @base https://tailwindcss.com/docs/upgrade-guide#adding-custom-utilities */
+:root {
+  @apply bg-background text-foreground font-inter overflow-x-hidden;
+}
+
+/* TODO @base https://tailwindcss.com/docs/upgrade-guide#adding-custom-utilities */
+.auth-container {
+  @apply xl:mx-auto max-w-[1200px] h-svh md:overflow-x-visible overflow-x-hidden w-full xl:px-0 px-5;
+}
+
+.container {
+  @apply max-w-[1200px] xl:mx-auto xl:px-0 sm:px-5 px-2;
+}
+
+/* TODO @base https://tailwindcss.com/docs/upgrade-guide#adding-custom-utilities */
+.input-errors-underline::spelling-error {
+  @apply underline underline-offset-2 decoration-rose-400 decoration-solid;
+}
+
+.input-errors-bg::spelling-error {
+  @apply bg-rose-400/10;
+}
+
+.without-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.without-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-outline {
+  @apply focus-visible:outline-second outline-none outline-2;
+}
+
+
+
+.simplebar-scrollbar::before {
+  @apply bg-foreground w-[6px];
+}
