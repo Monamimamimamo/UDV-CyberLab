@@ -29,7 +29,7 @@ export const Topbar = ({ links }: TopbarProps) => {
         color="secondary"
         onSelectionChange={(key) => handleSwitch(key as string)}
         selectedKey={hasEnabledKey(pathname)?.path || 'default'}
-        aria-label="Sidebar"
+        aria-label="Topbar"
         classNames={{
           tabContent: 'w-full text-[12px]',
           tab: 'px-[13px] min-w-[151px]',

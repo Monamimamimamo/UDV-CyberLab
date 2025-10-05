@@ -34,7 +34,7 @@ export const LogoutModal = () => {
               color="danger"
               size="md"
               radius="sm"
-              className="w-1/2 text-white bg-red-500"
+              className="w-1/2 text-white bg-red-400"
               onPress={handleLogout}
             >
               Выйти

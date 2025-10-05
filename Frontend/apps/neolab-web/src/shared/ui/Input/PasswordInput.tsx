@@ -17,7 +17,7 @@ export const PasswordInput = (props: InputProps) => {
           onClick={toggleVisibility}
           aria-label="toggle password visibility"
           className={clsx(
-            'custom-outline rounded-md text-2xl duration-200',
+            'custom-outline rounded-md text-2xl transition-background duration-200 cursor-pointer',
             props.isInvalid
               ? 'text-danger hover:text-danger-300'
               : 'text-foreground hover:text-foreground/80',

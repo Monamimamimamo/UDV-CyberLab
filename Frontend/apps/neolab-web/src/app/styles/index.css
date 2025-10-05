@@ -12,7 +12,7 @@
   @apply bg-background text-foreground font-inter overflow-x-hidden;
 }
 
-/* TODO @base https://tailwindcss.com/docs/upgrade-guide#adding-custom-utilities */
+/* TODO @components https://tailwindcss.com/docs/upgrade-guide#adding-custom-utilities */
 .auth-container {
   @apply xl:mx-auto max-w-[1200px] h-svh md:overflow-x-visible overflow-x-hidden w-full xl:px-0 px-5;
 }
@@ -21,7 +21,7 @@
   @apply max-w-[1200px] xl:mx-auto xl:px-0 sm:px-5 px-2;
 }
 
-/* TODO @base https://tailwindcss.com/docs/upgrade-guide#adding-custom-utilities */
+/* TODO @utils https://tailwindcss.com/docs/upgrade-guide#adding-custom-utilities */
 .input-errors-underline::spelling-error {
   @apply underline underline-offset-2 decoration-rose-400 decoration-solid;
 }
@@ -39,7 +39,7 @@
 }
 
 .custom-outline {
-  @apply focus-visible:outline-second outline-none outline-2;
+  @apply focus:outline-second focus:outline-2;
 }
 
 

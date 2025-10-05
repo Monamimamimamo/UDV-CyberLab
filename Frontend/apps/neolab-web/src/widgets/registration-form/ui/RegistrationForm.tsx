@@ -100,7 +100,7 @@ export const RegistrationForm = () => {
         Уже есть аккаунт?{' '}
         <Link
           to="/login"
-          className="text-link duration-200 hover:text-orange custom-outline outline-offset-4 rounded-sm"
+          className="text-link hover:text-orange custom-outline rounded-sm transition duration-200"
         >
           Войти
         </Link>

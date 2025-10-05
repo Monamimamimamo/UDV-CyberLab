@@ -53,7 +53,7 @@ export const HeaderProfileContent = ({
         onPress={handleLogout}
         startContent={<CiLogout size={22} />}
         color="danger"
-        className="data-[hover=true]:bg-rose-500/10"
+        className="data-[hover=true]:bg-red-500/10 text-red-500"
         type="button"
         fullWidth
         variant="light"

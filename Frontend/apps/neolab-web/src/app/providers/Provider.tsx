@@ -14,6 +14,7 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
           <NuqsAdapter>
             <BrowserRouter>
               <Suspense
+                key="root"
                 fallback={
                   <div className="flex h-svh items-center justify-center">
                     <Spinner size="lg" color="primary" label="Загрузка..." />

@@ -72,6 +72,7 @@ export const LoginForm = () => {
       />
 
       <p>
+        {/* TODO Вынести похожие ссылки в какой-нибудь общий компонент */}
         <span className="text-small hover:text-orange cursor-pointer duration-200">
           Забыли пароль?
         </span>
@@ -89,7 +90,7 @@ export const LoginForm = () => {
         Ещё нет аккаунта?{' '}
         <Link
           to="/registration"
-          className="text-link hover:text-orange custom-outline rounded-sm outline-offset-4 duration-200"
+          className="text-link hover:text-orange custom-outline rounded-sm transition duration-200"
         >
           Зарегистрироваться
         </Link>
