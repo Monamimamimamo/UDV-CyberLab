@@ -1,4 +1,5 @@
 using AutoMapper;
+using Core.Cards;
 using Domain.DTO;
 using Domain.Entities;
 

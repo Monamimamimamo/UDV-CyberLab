@@ -1,4 +1,5 @@
 using AutoMapper;
+using Core.Cards;
 using CRM.Data.Common.Exceptions;
 using Domain.DTO;
 using Domain.Entities;
@@ -27,7 +28,7 @@ public class CommentService(
             Text = commentDto.Text,
             AuthorId = authorId,
             AuthorName = commentDto.UserName,
-            ProjectId = commentDto.ProjectId,
+            CardId = commentDto.ProjectId,
             CreatedAt = DateTime.UtcNow
         };
 
@@ -83,7 +84,7 @@ public class CommentService(
         {
             throw new NoAccessException("You are not authorized to delete this comment.");
         }
-        var project = await _projectRepository.GetByIdAsync<ProjectCard>(comment.ProjectId);
+        var project = await _projectRepository.GetByIdAsync<ProjectCard>(comment.CardId);
         project.CommentsCount--;
         await _projectRepository.UpdateAsync(project);
 

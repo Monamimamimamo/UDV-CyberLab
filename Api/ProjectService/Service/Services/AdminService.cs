@@ -1,4 +1,5 @@
 using AutoMapper;
+using Core.Cards;
 using CRM.Data.Common.Exceptions;
 using Domain.DTO;
 using Domain.Entities;
@@ -94,7 +95,7 @@ namespace Service.Services
                 throw new NotFoundException($"Комментарий с ID {commentId} не найден");
             }
 
-            var project = await _projectRepository.GetByIdAsync<ProjectCard>(comment.ProjectId);
+            var project = await _projectRepository.GetByIdAsync<ProjectCard>(comment.CardId);
             project.CommentsCount--;
             await _projectRepository.UpdateAsync(project);
 

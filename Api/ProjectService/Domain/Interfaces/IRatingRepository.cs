@@ -1,3 +1,4 @@
+using Core.Cards;
 using Domain.Entities;
 
 namespace Domain.Interfaces;

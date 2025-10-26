@@ -1,3 +1,4 @@
+using Core.Cards;
 using Domain.Entities;
 using Domain.Interfaces;
 using Infrastucture.Data;
@@ -10,13 +11,13 @@ public class RatingRepository(ProjectsDbContext context) : BaseRepository(contex
     public async Task<Rating?> GetUserRatingForProjectAsync(Guid projectId, Guid userId)
     {
         return await context.Ratings
-            .FirstOrDefaultAsync(r => r.ProjectId == projectId && r.UserId == userId);
+            .FirstOrDefaultAsync(r => r.CardId == projectId && r.UserId == userId);
     }
 
     public async Task<List<Rating>> GetAllRatingsForProjectAsync(Guid projectId)
     {
         return await context.Ratings
-            .Where(r => r.ProjectId == projectId)
+            .Where(r => r.CardId == projectId)
             .OrderByDescending(r => r.CreatedAt)
             .ToListAsync();
     }
@@ -24,7 +25,7 @@ public class RatingRepository(ProjectsDbContext context) : BaseRepository(contex
     public async Task<double> GetAverageRatingForProjectAsync(Guid projectId)
     {
         var avg = await context.Ratings
-            .Where(r => r.ProjectId == projectId)
+            .Where(r => r.CardId == projectId)
             .Select(r => r.Value)
             .AverageOrDefaultAsync();
 
@@ -34,6 +35,6 @@ public class RatingRepository(ProjectsDbContext context) : BaseRepository(contex
     public async Task<int> GetRatingCountForProjectAsync(Guid projectId)
     {
         return await context.Ratings
-            .CountAsync(r => r.ProjectId == projectId);
+            .CountAsync(r => r.CardId == projectId);
     }
 }

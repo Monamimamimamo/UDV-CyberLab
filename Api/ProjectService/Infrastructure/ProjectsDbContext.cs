@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Core.Cards;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
@@ -19,22 +20,22 @@ namespace Infrastructure
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Comment>()
-                .HasOne(c => c.Project)
+                .HasOne(c => c.Card)
                 .WithMany()
-                .HasForeignKey(c => c.ProjectId)
+                .HasForeignKey(c => c.CardId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Rating>()
-                .HasOne(r => r.Project)
+                .HasOne(r => r.Card)
                 .WithMany()
-                .HasForeignKey(r => r.ProjectId)
+                .HasForeignKey(r => r.CardId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Make ProjectId and UserId a unique constraint for ratings
             modelBuilder.Entity<Rating>()
-                .HasIndex(r => new { r.ProjectId, r.UserId })
+                .HasIndex(r => new { r.CardId, r.UserId })
                 .IsUnique();
         }
     }

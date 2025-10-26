@@ -1,4 +1,5 @@
 using AutoMapper;
+using Core.Cards;
 using CRM.Data.Common.Exceptions;
 using Domain.DTO;
 using Domain.Entities;
@@ -43,7 +44,7 @@ public class RatingService(
         var newRating = new Rating
         {
             Id = Guid.NewGuid(),
-            ProjectId = ratingDto.ProjectId,
+            CardId = ratingDto.ProjectId,
             UserId = userId,
             Value = ratingDto.Value,
             CreatedAt = DateTime.UtcNow

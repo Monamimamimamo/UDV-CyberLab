@@ -1,3 +1,4 @@
+using Core.Cards;
 using Domain.Entities;
 using Domain.Interfaces;
 using Infrastucture.Data;
@@ -10,7 +11,7 @@ public class CommentRepository(ProjectsDbContext context) : BaseRepository(conte
     public async Task<List<Comment>> GetCommentsByProjectIdAsync(Guid projectId)
     {
         return await context.Comments
-            .Where(c => c.ProjectId == projectId)
+            .Where(c => c.CardId == projectId)
             .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();
     }
