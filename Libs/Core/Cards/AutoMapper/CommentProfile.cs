@@ -1,9 +1,7 @@
 using AutoMapper;
-using Core.Cards;
-using Domain.DTO;
-using Domain.Entities;
+using Core.Cards.DTO;
 
-namespace Service.AutoMapper
+namespace Core.Cards.AutoMapper
 {
     public class CommentProfile : Profile
     {

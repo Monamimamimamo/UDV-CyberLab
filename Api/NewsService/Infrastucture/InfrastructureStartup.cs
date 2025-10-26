@@ -4,12 +4,12 @@ using Core.Cards.Repository;
 using Core.Cards.Repository.Interface;
 using Core.Data;
 using ExampleCore.AuthOptions;
-using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using CommentRepository = Infrastructure.Data.CommentRepository;
+
+namespace Infrastucture;
 
 public static class InfrastuctureStartup
 {
@@ -21,9 +21,9 @@ public static class InfrastuctureStartup
         serviceCollection.TryAddScoped<ICommentRepository, CommentRepository>();
         serviceCollection.TryAddScoped<IRatingRepository, RatingRepository>();
         serviceCollection.AddAuth();
-        serviceCollection.AddDbContext<ProjectsDbContext>(options => { options.UseNpgsql(connectionString); });
+        serviceCollection.AddDbContext<NewsDbContext>(options => { options.UseNpgsql(connectionString); });
 
-        serviceCollection.AddScoped<DbContext>(provider => provider.GetService<ProjectsDbContext>());
+        serviceCollection.AddScoped<DbContext>(provider => provider.GetService<NewsDbContext>());
 
         var awsOptions = new AmazonS3Config
         {

@@ -5,22 +5,23 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
 
+
 namespace Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class ProjectCardController(IProjectService _projectService) : ControllerBase
+public class NewsCardController(INewsCardService _projectService) : ControllerBase
 {
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetProjectCard(Guid id)
+    public async Task<IActionResult> GetNewsCard(Guid id)
     {
         var card = await _projectService.GetByIdAsync(id);
         return Ok(card);
     }
 
     [HttpGet("allShort")]
-    public async Task<IActionResult> GetAllShortProjectCards([FromQuery] SortOrder sortOrder = SortOrder.Default,
+    public async Task<IActionResult> GetAllShortCards([FromQuery] SortOrder sortOrder = SortOrder.Default,
         [FromQuery] string? searchQuery = null)
     {
         var filter = new CardFilterDto
@@ -29,32 +30,22 @@ public class ProjectCardController(IProjectService _projectService) : Controller
             Name = searchQuery
         };
 
-        var filteredProjects = await _projectService.GetFilteredProjectsAsync(filter);
+        var filteredProjects = await _projectService.GetFilteredCardAsync(filter);
         return Ok(filteredProjects);
     }
 
-    [HttpGet("myCards")]
-    public async Task<IActionResult> GetUserCards()
-    {
-        var currentUserId = UserHelper.GetUserId(HttpContext.Request);
-
-        var cards = await _projectService.GetUserProjects(currentUserId);
-        return Ok(cards);
-    }
-
     [HttpPost]
-    public async Task<IActionResult> CreateProjectCard([FromForm] ProjectCardDTO request)
+    public async Task<IActionResult> CreateProjectCard([FromForm] NewsCardDto request)
     {
         var ownerId = UserHelper.GetUserId(HttpContext.Request);
 
-        var guid = await _projectService.CreateAsync(request, request.LogoPhoto, request.ProjectPhoto,
-            request.Documentation, ownerId);
+        var guid = await _projectService.CreateAsync(request, request.LogoPhoto, request.ProjectPhoto, ownerId);
 
         return Ok(guid);
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateProjectCard([FromForm] ProjectCardUpdateDto request)
+    public async Task<IActionResult> UpdateProjectCard([FromForm] NewsCardUpdateDto request)
     {
         var guid = await _projectService.UpdateAsync(request);
 

@@ -33,7 +33,7 @@ namespace Infrastructure
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Make ProjectId and UserId a unique constraint for ratings
+            // Make CardId and UserId a unique constraint for ratings
             modelBuilder.Entity<Rating>()
                 .HasIndex(r => new { r.CardId, r.UserId })
                 .IsUnique();

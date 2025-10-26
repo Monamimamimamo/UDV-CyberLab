@@ -1,25 +1,53 @@
+using Core.Middlewares;
+using ExampleCore.Swagger;
+using Infrastucture;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
+builder.Services.AddSwaggerStartUpBase();
+builder.Services.TryAddServices();
+builder.Services.TryAddInfrastucture(builder.Configuration);
+builder.Services.AddCors(cors =>
+    cors.AddDefaultPolicy(policy => policy
+        .WithOrigins("https://localhost:7023",
+            "http://90.156.168.7:8080",
+            "https://neolab.aydlioh.ru",
+            "http://localhost:5173",
+            "http://localhost:4173")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials()));
+
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+        options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+    });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<NewsDbContext>();
+    await context.Database.MigrateAsync();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
+app.UseSwagger();
+app.UseSwaggerUI();
+app.UseCors();
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseHttpsRedirection();
+app.MapControllers();
 
-app.MapRazorPages();
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.Run();

@@ -4,7 +4,6 @@ using Core.Cards.Service.Interface;
 using Microsoft.Extensions.DependencyInjection;
 using Service.AutoMapper;
 using Service.Interfaces;
-using Service.Services;
 using RatingService = Core.Cards.Service.RatingService;
 
 namespace Service;
@@ -13,10 +12,9 @@ public static class ServiceStartUp
 {
     public static IServiceCollection TryAddServices(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddScoped<IProjectService, ProjectService>();
+        serviceCollection.AddScoped<INewsCardService, INewsCardService>();
         serviceCollection.AddScoped<ICommentService, CommentService>();
         serviceCollection.AddScoped<IRatingService, RatingService>();
-        serviceCollection.AddScoped<IAdminService, AdminService>();
         AddAutoMapper(serviceCollection);
         return serviceCollection;
     }

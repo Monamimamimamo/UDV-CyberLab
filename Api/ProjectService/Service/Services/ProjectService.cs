@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Core.Cards.DTO;
+using Core.Cards.Repository.Interface;
 using Core.Data;
 using CRM.Data.Common.Exceptions;
 using Domain.DTO;
@@ -11,7 +13,7 @@ namespace Service.Services;
 
 public class ProjectService(
     IFileManager _fileManager,
-    IProjectRepository _projectRepository,
+    ICardRepository _cardRepository,
     IMapper _mapper)
     : IProjectService
 {
@@ -33,14 +35,14 @@ public class ProjectService(
         card.OwnerId = ownerId;
         card.CreatedAt = DateTime.UtcNow;
 
-        var cardId = await _projectRepository.CreateAsync(card.Id, card);
+        var cardId = await _cardRepository.CreateAsync(card.Id, card);
 
         return cardId;
     }
 
     public async Task<ProjectPageDto> GetByIdAsync(Guid id)
     {
-        var card = await _projectRepository.GetByIdAsync<ProjectCard>(id);
+        var card = await _cardRepository.GetByIdAsync<ProjectCard>(id);
         if (card == null)
         {
             throw new NotFoundException($"Project with id {id} didn't find.");
@@ -48,21 +50,22 @@ public class ProjectService(
 
         card.ViewsCount++;
 
-        await _projectRepository.UpdateAsync(card);
+        await _cardRepository.UpdateAsync(card);
 
         return _mapper.Map<ProjectPageDto>(card);
     }
 
     public async Task<ShortCardDto[]> GetUserProjects(Guid userId)
     {
-       var projects = await _projectRepository.GetUserProjectsAsync(userId);
+       var projects = await _cardRepository.GetUserCardsAsync
+           (userId);
 
         return _mapper.Map<ShortCardDto[]>(projects);
     }
 
     public async Task<ProjectCardFilesResponse> GetProjectFilesAsync(Guid projectId)
     {
-        var card = await _projectRepository.GetByIdAsync<ProjectCard>(projectId);
+        var card = await _cardRepository.GetByIdAsync<ProjectCard>(projectId);
 
         if (card == null)
             throw new FileNotFoundException($"Project with id {projectId} didn't find.");
@@ -100,7 +103,7 @@ public class ProjectService(
 
     public async Task<Guid> UpdateAsync(ProjectCardUpdateDto updateDto)
     {
-        var existingCard = await _projectRepository.GetByIdAsync<ProjectCard>(updateDto.Id);
+        var existingCard = await _cardRepository.GetByIdAsync<ProjectCard>(updateDto.Id);
         if (existingCard == null)
         {
             throw new NotFoundException($"Project with id {updateDto.Id} didn't find.");
@@ -167,14 +170,14 @@ public class ProjectService(
                 $"documentation_{existingCard.Name}");
         }
 
-        await _projectRepository.UpdateAsync(existingCard);
+        await _cardRepository.UpdateAsync(existingCard);
 
         return existingCard.Id;
     }
 
-    public async Task<ShortCardDto[]> GetFilteredProjectsAsync(ProjectFilterDto filter)
+    public async Task<ShortCardDto[]> GetFilteredProjectsAsync(CardFilterDto filter)
     {
-        var projects = await _projectRepository.GetFilteredProjectsAsync(filter);
+        var projects = await _cardRepository.GetFilteredCardsAsync(filter);
 
         var shortCards = _mapper.Map<ShortCardDto[]>(projects);
 
@@ -183,7 +186,7 @@ public class ProjectService(
 
     public async Task<bool> DeleteProjectCardAsync(Guid cardId)
     {
-        var card = await _projectRepository.GetByIdAsync<ProjectCard>(cardId);
+        var card = await _cardRepository.GetByIdAsync<ProjectCard>(cardId);
         if (!string.IsNullOrEmpty(card.DocumentationPath))
         {
             await _fileManager.DeleteAsync(card.DocumentationPath);
@@ -197,6 +200,6 @@ public class ProjectService(
             await _fileManager.DeleteAsync(card.LogoPath);
         }
 
-        return card != null && await _projectRepository.DeleteAsync(card);
+        return card != null && await _cardRepository.DeleteAsync(card);
     }
 }

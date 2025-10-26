@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.DTO
+namespace Core.Cards.DTO
 {
     public class RatingUpdateDto
     {

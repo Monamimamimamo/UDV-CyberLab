@@ -1,6 +1,5 @@
 using Core.Cards;
-using Domain.Entities;
-using Domain.Interfaces;
+using Core.Cards.Repository.Interface;
 using Infrastucture.Data;
 using Microsoft.EntityFrameworkCore;
 

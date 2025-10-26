@@ -3,6 +3,7 @@ using ExampleCore.Swagger;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Service;
 
 var builder = WebApplication.CreateBuilder(args);
 

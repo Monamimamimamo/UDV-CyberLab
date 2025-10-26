@@ -1,7 +1,6 @@
-using Core.Cards;
-using Domain.Entities;
+using Domain.Interfaces;
 
-namespace Domain.Interfaces;
+namespace Core.Cards.Repository.Interface;
 
 public interface IRatingRepository : IStandartStore
 {

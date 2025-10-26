@@ -1,9 +1,9 @@
 using AutoMapper;
 using Core.Cards;
+using Core.Cards.Repository.Interface;
 using CRM.Data.Common.Exceptions;
 using Domain.DTO;
 using Domain.Entities;
-using Domain.Interfaces;
 using Service.Interfaces;
 
 namespace Service.Services
@@ -12,16 +12,16 @@ namespace Service.Services
     {
         private readonly ICommentRepository _commentRepository;
         private readonly IMapper _mapper;
-        private readonly IProjectRepository _projectRepository;
+        private readonly ICardRepository _cardRepository;
         private readonly IRatingRepository _ratingRepository;
 
         public AdminService(
-            IProjectRepository projectRepository,
+            ICardRepository cardRepository,
             ICommentRepository commentRepository,
             IRatingRepository ratingRepository,
             IMapper mapper)
         {
-            _projectRepository = projectRepository;
+            _cardRepository = cardRepository;
             _commentRepository = commentRepository;
             _ratingRepository = ratingRepository;
             _mapper = mapper;
@@ -29,7 +29,7 @@ namespace Service.Services
 
         public async Task<AdminDashboardDto> GetDashboardAsync()
         {
-            var projects = await _projectRepository.GetAllAsync<ProjectCard>();
+            var projects = await _cardRepository.GetAllAsync<ProjectCard>();
 
             var projectCommentCounts = new Dictionary<Guid, int>();
             foreach (var project in projects)
@@ -66,7 +66,7 @@ namespace Service.Services
 
         public async Task<ProjectStatisticsDto> GetProjectStatisticsAsync(Guid projectId)
         {
-            var project = await _projectRepository.GetByIdAsync<ProjectCard>(projectId);
+            var project = await _cardRepository.GetByIdAsync<ProjectCard>(projectId);
             if (project == null)
             {
                 throw new NotFoundException($"Проект с ID {projectId} не найден");
@@ -95,9 +95,9 @@ namespace Service.Services
                 throw new NotFoundException($"Комментарий с ID {commentId} не найден");
             }
 
-            var project = await _projectRepository.GetByIdAsync<ProjectCard>(comment.CardId);
+            var project = await _cardRepository.GetByIdAsync<ProjectCard>(comment.CardId);
             project.CommentsCount--;
-            await _projectRepository.UpdateAsync(project);
+            await _cardRepository.UpdateAsync(project);
 
             await _commentRepository.DeleteAsync(comment);
 
@@ -106,7 +106,7 @@ namespace Service.Services
 
         public async Task<bool> DeleteProjectAsync(Guid projectId)
         {
-            var project = await _projectRepository.GetByIdAsync<ProjectCard>(projectId);
+            var project = await _cardRepository.GetByIdAsync<ProjectCard>(projectId);
             if (project == null)
             {
                 throw new NotFoundException($"Проект с ID {projectId} не найден");
@@ -124,13 +124,13 @@ namespace Service.Services
                 await _ratingRepository.DeleteAsync(rating);
             }
 
-            await _projectRepository.DeleteAsync(project);
+            await _cardRepository.DeleteAsync(project);
             return true;
         }
 
         public async Task<List<CommentDto>> GetAllCommentsForModerationAsync()
         {
-            var allProjects = await _projectRepository.GetAllAsync<ProjectCard>();
+            var allProjects = await _cardRepository.GetAllAsync<ProjectCard>();
             var allComments = new List<Comment>();
 
             foreach (var project in allProjects)
