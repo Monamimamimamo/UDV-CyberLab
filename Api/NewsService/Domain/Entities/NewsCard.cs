@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Cards;
 
 namespace Domain.Entities
 {
-    internal class NewsCard
+    public record NewsCard : CardEntity
     {
+        public string? URL { get; set; }
     }
 }
