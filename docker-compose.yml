@@ -53,6 +53,26 @@ services:
       - database
     restart: always
 
+  news:
+    build:
+      context: .
+      dockerfile: Api/NewsService/NewsService/Dockerfile
+    ports:
+      - "5153:5153"
+    depends_on:
+      news-db:
+        condition: service_healthy
+    environment:
+      - ConnectionStrings__DefaultConnection=User ID=postgres;Password=123;Host=news-db;Port=5432;Database=newsNEOLab;Pooling=true;
+      - ASPNETCORE_ENVIRONMENT=Development
+      - YandexStorage__BucketName=${YANDEX_BUCKET_NAME}
+      - YandexStorage__ServiceUrl=${YANDEX_SERVICE_URL}
+      - YandexStorage__AccessKey=${YANDEX_ACCESS_KEY}
+      - YandexStorage__SecretKey=${YANDEX_SECRET_KEY}
+    networks:
+      - database
+    restart: always
+
   db:
     image: postgres:16
     environment:
