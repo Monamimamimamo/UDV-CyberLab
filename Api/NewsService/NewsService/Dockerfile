@@ -1,30 +1,28 @@
-# См. статью по ссылке https://aka.ms/customizecontainer, чтобы узнать как настроить контейнер отладки и как Visual Studio использует этот Dockerfile для создания образов для ускорения отладки.
-
-# Этот этап используется при запуске из VS в быстром режиме (по умолчанию для конфигурации отладки)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 5153
 
+ENV ASPNETCORE_URLS=http://+:5153
 
-# Этот этап используется для сборки проекта службы
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
+USER app
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG configuration=Release
 WORKDIR /src
-COPY ["NewsService/NewsService.csproj", "NewsService/"]
-RUN dotnet restore "./NewsService/NewsService.csproj"
+COPY ["Api/NewsService/NewsService/Api.csproj", "Api/NewsService/NewsService/"]
+COPY ["Api/NewsService/Infrastucture/Infrastucture.csproj", "Api/NewsService/Infrastucture/"]
+COPY ["Api/NewsService/Service/Service.csproj", "Api/NewsService/Service/"]
+COPY ["Api/NewsService/Domain/Domain.csproj", "Api/NewsService/Domain/"]
+COPY ["Libs/Core/Core.csproj", "Libs/Core/"]
+RUN dotnet restore "Api/NewsService/NewsService/Api.csproj"
 COPY . .
-WORKDIR "/src/NewsService"
-RUN dotnet build "./NewsService.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/Api/NewsService/NewsService"
+RUN dotnet build "Api.csproj" -c $configuration -o /app/build
 
-# Этот этап используется для публикации проекта службы, который будет скопирован на последний этап
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./NewsService.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+ARG configuration=Release
+RUN dotnet publish "Api.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
 
-# Этот этап используется в рабочей среде или при запуске из VS в обычном режиме (по умолчанию, когда конфигурация отладки не используется)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "NewsService.dll"]
+ENTRYPOINT ["dotnet", "Api.dll"]

@@ -5,7 +5,6 @@ using Core.Data;
 using CRM.Data.Common.Exceptions;
 using Domain.DTO;
 using Domain.Entities;
-using Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Service.Interfaces;
 

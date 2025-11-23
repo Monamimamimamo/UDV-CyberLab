@@ -54,7 +54,7 @@ services:
     restart: always
 
   db:
-    image: postgres:latest
+    image: postgres:16
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
@@ -74,7 +74,7 @@ services:
       retries: 5
 
   tests-db:
-    image: postgres:latest
+    image: postgres:16
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
@@ -94,7 +94,7 @@ services:
       retries: 5
 
   projects-db:
-    image: postgres:latest
+    image: postgres:16
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
@@ -113,7 +113,27 @@ services:
       timeout: 5s
       retries: 5
 
-  prometheus:
+  news-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: newsNEOLab
+    volumes:
+      - news_postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: >
+      postgres
+      -c shared_preload_libraries=pg_stat_statements
+    networks:
+      - database
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+      prometheus:
     image: prom/prometheus:latest
     ports:
       - "9090:9090"
@@ -168,6 +188,7 @@ volumes:
   postgres_data:
   tests_postgres_data:
   projects_postgres_data:
+  news_postgres_data:
   grafana-storage:
 
 networks:

@@ -38,7 +38,7 @@ pipeline {
             steps {
                 sh '''
                     sudo chmod 666 /var/run/docker.sock
-                    docker rm -f udv-cyberlab-tests-1 udv-cyberlab-identity-1 udv-cyberlab-projects-1
+                    docker rm -f udv-cyberlab-tests-1 udv-cyberlab-identity-1 udv-cyberlab-projects-1 udv-cyberlab-news-1
                     docker system prune -af --volumes
                 '''
             }
