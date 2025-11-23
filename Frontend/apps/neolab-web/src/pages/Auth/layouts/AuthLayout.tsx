@@ -10,7 +10,7 @@ const AuthLayout = () => {
     <Scrollbar className="max-h-svh">
       <main className="auth-container flex items-center justify-center">
         <div className="relative flex flex-col-reverse items-center justify-center gap-[26px] lg:w-full lg:flex-row lg:gap-0 xl:justify-between">
-          <div className="relative z-10 w-full sm:h-[580px] md:w-[500px]">
+          <div className="relative z-10 w-full flex-shrink-0 sm:h-[580px] md:w-[500px]">
             <Suspense
               key={location.pathname}
               fallback={

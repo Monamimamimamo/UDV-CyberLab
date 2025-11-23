@@ -2,6 +2,8 @@ export * from './model/store';
 export * from './model/types';
 export * from './model/schemas/login-schema';
 export * from './model/schemas/register-schema';
+export * from './model/schemas/reset-password-schema';
+export * from './model/schemas/new-password-schema';
 export * from './model/dto/LoginRequestDTO';
 export * from './model/dto/RegisterRequestDTO';
 export * from './model/hooks/useSessionTimeout';

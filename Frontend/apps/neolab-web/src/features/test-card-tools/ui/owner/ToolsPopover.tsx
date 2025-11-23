@@ -1,4 +1,4 @@
-import { TestToolsIcon } from '@/shared/assets/svgs';
+import { NeolabTestToolsIcon } from '@/shared/assets/svgs';
 import { Button } from '@/shared/ui';
 import { Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
 import { ToolsContent } from './ToolsContent';
@@ -15,7 +15,7 @@ export const ToolsPopover = ({ id }: { id: string }) => {
     >
       <PopoverTrigger>
         <Button isIconOnly color="default" variant="light">
-          <TestToolsIcon />
+          <NeolabTestToolsIcon />
         </Button>
       </PopoverTrigger>
       <PopoverContent>

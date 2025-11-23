@@ -1,5 +1,5 @@
 import type { ITestDetails } from '../model/types/ITestDetails';
-import { TestIcon } from '@/shared/assets/svgs';
+import { NeolabTestIcon } from '@/shared/assets/svgs';
 import { TestTimeFormatter } from './TestTimeFormatter';
 import { getTestStatus } from '../';
 import { CircularProgress } from '@/shared/ui';
@@ -30,7 +30,7 @@ export const TestDetails = ({
   return (
     <div>
       <div className="flex flex-row items-start justify-center gap-4">
-        <TestIcon className="hidden h-auto w-[60px] sm:block sm:w-[73px]" />
+        <NeolabTestIcon className="hidden h-auto w-[60px] sm:block sm:w-[73px]" />
         <div className="flex flex-col sm:gap-[14px]">
           <div>
             <h3 className="mobile:text-[28px] mb-[8px] line-clamp-3 text-[24px] leading-[28px] font-medium sm:text-[32px] sm:leading-[39px]">

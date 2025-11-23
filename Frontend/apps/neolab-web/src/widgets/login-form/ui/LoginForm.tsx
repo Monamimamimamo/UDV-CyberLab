@@ -41,7 +41,6 @@ export const LoginForm = () => {
         defaultValue=""
         render={({ field }) => (
           <Input
-            isRequired
             isInvalid={isEmailError}
             errorMessage={errors.email?.message}
             {...field}
@@ -59,7 +58,6 @@ export const LoginForm = () => {
         defaultValue=""
         render={({ field }) => (
           <PasswordInput
-            isRequired
             isInvalid={isPasswordError}
             errorMessage={errors.password?.message || error?.message}
             {...field}
@@ -71,11 +69,14 @@ export const LoginForm = () => {
         )}
       />
 
-      <p>
+      <p className='text-small'>
         {/* TODO Вынести похожие ссылки в какой-нибудь общий компонент */}
-        <span className="text-small hover:text-orange cursor-pointer duration-200">
+        <Link
+          to="/reset-password"
+          className="text-link hover:text-orange custom-outline rounded-sm transition duration-200"
+        >
           Забыли пароль?
-        </span>
+        </Link>
       </p>
       <Button
         color="gradient"

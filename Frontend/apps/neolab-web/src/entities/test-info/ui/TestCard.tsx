@@ -1,4 +1,4 @@
-import { TestIcon } from '@/shared/assets/svgs';
+import { NeolabTestIcon } from '@/shared/assets/svgs';
 import type { ITestCard } from '../model/types/ITestCard';
 
 type TestCardProps = {
@@ -23,7 +23,7 @@ export const TestCard = ({ test, onClick, rightContent }: TestCardProps) => {
     >
       <div className="flex h-full flex-row items-center justify-between px-4 py-3">
         <div className="flex flex-row items-center justify-start gap-[10px]">
-          <TestIcon className="text-[30px]" />
+          <NeolabTestIcon className="text-[30px]" />
           <p className="line-clamp-1 w-[calc(100%-50px)] text-[15px] sm:text-[16px]">
             {test.title}
           </p>

@@ -42,7 +42,6 @@ export const RegistrationForm = () => {
         defaultValue=""
         render={({ field }) => (
           <Input
-            isRequired
             isInvalid={isLoginError}
             errorMessage={errors.userName?.message}
             {...field}
@@ -59,7 +58,6 @@ export const RegistrationForm = () => {
         defaultValue=""
         render={({ field }) => (
           <Input
-            isRequired
             isInvalid={isEmailError}
             errorMessage={errors.email?.message}
             {...field}
@@ -76,7 +74,6 @@ export const RegistrationForm = () => {
         defaultValue=""
         render={({ field }) => (
           <PasswordInput
-            isRequired
             isInvalid={isPasswordError}
             errorMessage={errors.password?.message || error?.message}
             {...field}
