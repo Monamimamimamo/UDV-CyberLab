@@ -8,7 +8,7 @@ const NewsPage = () => {
 
   return (
     <section className="mb-20 flex w-full max-w-[712px] flex-col gap-4">
-      <AdminNewsFilters sort={sort} setSort={setSort} />
+      <AdminNewsFilters withCreateButton sort={sort} setSort={setSort} />
       <QueryBoundary
         fallbackLoader={
           <div className="mt-20 flex w-full items-center justify-center">
@@ -17,127 +17,7 @@ const NewsPage = () => {
         }
       >
         <ul>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
+          <li>123</li>
         </ul>
       </QueryBoundary>
     </section>

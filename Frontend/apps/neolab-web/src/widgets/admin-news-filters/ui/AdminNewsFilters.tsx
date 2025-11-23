@@ -1,9 +1,11 @@
 import { newsDefaultSorting } from '@/entities/sorting';
 import { NewsCreateButton } from '@/features/news-create-button';
-import { StickySearch } from '@/shared/common/components';
-import { StickyElement } from '@/shared/ui';
+import { useMediaQuery } from '@/shared/hooks';
+import { SearchInput, StickyElement } from '@/shared/ui';
 
 import { Select, SelectItem } from '@/shared/ui';
+import clsx from 'clsx';
+import { useQueryState } from 'nuqs';
 
 const selectClassNames = {
   itemClasses: {
@@ -16,12 +18,43 @@ type NewsSelectProps = {
   setSort: (value: string) => void;
 };
 
-export const AdminNewsFilters = ({ sort, setSort }: NewsSelectProps) => {
+type AdminNewsFilters = {
+  withCreateButton?: boolean;
+  fullPage?: boolean;
+};
+
+export const AdminNewsFilters = ({
+  sort,
+  setSort,
+  withCreateButton = false,
+  fullPage = false,
+}: NewsSelectProps & AdminNewsFilters) => {
+  const [search, setSearch] = useQueryState('search', { defaultValue: '' });
+  const isTablet = useMediaQuery({ query: '(max-width: 1024px)' });
+
   return (
-    <StickyElement className="top-[75px] z-10">
-      <StickySearch placeholder="Поиск новости..." />
-      <div className="mt-4 flex flex-col items-center justify-between sm:flex-row">
-        <div className="flex sm:max-w-[250px] w-full flex-row items-center gap-2">
+    <StickyElement
+      shadow={!isTablet}
+      className={clsx(
+        'top-[75px] z-10',
+        fullPage && 'my-2 flex flex-col items-center justify-between gap-4 sm:flex-row',
+      )}
+    >
+      <SearchInput
+        search={search}
+        setSearch={setSearch}
+        classNames={{
+          inputWrapper: 'h-[52px]',
+        }}
+        placeholder="Поиск новости..."
+      />
+      <div
+        className={clsx(
+          'flex w-full flex-col items-center justify-between gap-4 sm:w-auto sm:flex-row',
+          !fullPage && 'mt-4',
+        )}
+      >
+        <div className="w-full sm:w-[250px]">
           <Select
             color="white"
             aria-label="Выберите сортировку"
@@ -42,9 +75,11 @@ export const AdminNewsFilters = ({ sort, setSort }: NewsSelectProps) => {
             ))}
           </Select>
         </div>
-        <div className="bg-background mt-3 w-full self-end rounded-xl drop-shadow-md sm:mt-0 sm:w-auto">
-          <NewsCreateButton onCliсk={() => console.log(1)} />
-        </div>
+        {withCreateButton && (
+          <div className="bg-background mt-3 w-full self-end rounded-xl drop-shadow-md sm:mt-0 sm:w-auto">
+            <NewsCreateButton onCliсk={() => console.log(1)} />
+          </div>
+        )}
       </div>
     </StickyElement>
   );
