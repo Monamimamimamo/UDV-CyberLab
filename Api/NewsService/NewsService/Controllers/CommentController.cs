@@ -8,7 +8,7 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ProjectCommentController(ICommentService _commentService) : CommentsController(_commentService)
+    public class NewsCommentController(ICommentService _commentService) : CommentsController(_commentService)
     {
     }
 }

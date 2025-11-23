@@ -9,7 +9,7 @@ namespace Core.Cards.Controllers
     public abstract class CommentsController(ICommentService _commentService) : ControllerBase
     {
         [HttpGet("{cardId}")]
-        public async Task<IActionResult> GetProjectComments(Guid cardId)
+        public async Task<IActionResult> GetComments(Guid cardId)
         {
             var comments = await _commentService.GetCommentsByProjectIdAsync(cardId);
             return Ok(comments);
