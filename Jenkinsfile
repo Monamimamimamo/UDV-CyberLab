@@ -65,7 +65,7 @@ pipeline {
                 sh '''
                 cd /UDV-CyberLab
                 echo "ASPNETCORE_ENVIRONMENT = $ASPNETCORE_ENVIRONMENT"
-                   docker-compose up -d --build
+                   docker compose up -d --build
                 '''
             }
         }
