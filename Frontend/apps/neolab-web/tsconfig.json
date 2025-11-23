@@ -1,0 +1,5 @@
+{
+  "extends": "@neolab/typescript-config/vite.json",
+  "files": [],
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
+}
