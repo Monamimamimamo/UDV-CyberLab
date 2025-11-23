@@ -6,8 +6,8 @@ export const useCreateComment = () => {
   return useMutation({
     mutationKey: ['comment/create'],
     mutationFn: commentApi.create,
-    onSuccess: (data: { projectId: string }) => {
-      queryClient.invalidateQueries({ queryKey: ['comments', data.projectId] });
+    onSuccess: (data: { cardId: string }) => {
+      queryClient.invalidateQueries({ queryKey: ['comments', data.cardId] });
     },
   });
 };

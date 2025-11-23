@@ -4,10 +4,10 @@ import {
   authRoutes,
   testRoutes,
   projectsRoutes,
-  eventsRoutes,
   labsRoutes,
   materialsRoutes,
   adminRoutes,
+  newsRoutes,
 } from '@/pages';
 import { AuthGuard, NoAuthGuard } from './guards';
 import { useRoutes } from 'react-router-dom';
@@ -30,9 +30,9 @@ const routes = [
           ...mainRoutes,
           ...testRoutes,
           ...projectsRoutes,
-          ...eventsRoutes,
           ...labsRoutes,
           ...materialsRoutes,
+          ...newsRoutes,
           {
             element: <AdminGuard />,
             children: [...adminRoutes],

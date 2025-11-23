@@ -1,14 +1,14 @@
-import { QueryBoundary, StickySearch } from '@/shared/common/components';
+import { QueryBoundary } from '@/shared/common/components';
 import { Spinner } from '@/shared/ui';
-import { AdminProjectListWithQuery } from '@/widgets/admin-project-list';
+import { AdminNewsFilters } from '@/widgets/admin-news-filters';
 import { useQueryState } from 'nuqs';
 
-const AdminProjectsPage = () => {
-  const [search] = useQueryState('search', { defaultValue: '' });
+const NewsPage = () => {
+  const [sort, setSort] = useQueryState('sort', { defaultValue: '' });
 
   return (
     <section className="mb-20 flex w-full max-w-[712px] flex-col gap-4">
-      <StickySearch placeholder="Поиск проекта..." />
+      <AdminNewsFilters sort={sort} setSort={setSort} />
       <QueryBoundary
         fallbackLoader={
           <div className="mt-20 flex w-full items-center justify-center">
@@ -16,10 +16,9 @@ const AdminProjectsPage = () => {
           </div>
         }
       >
-        <AdminProjectListWithQuery search={search} />
       </QueryBoundary>
     </section>
   );
 };
 
-export default AdminProjectsPage;
+export default NewsPage;

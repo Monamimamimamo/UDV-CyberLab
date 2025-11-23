@@ -26,7 +26,7 @@ export default {
         focus: '#9599CC',
 
         controls: '#E9E9F1',
-        controlsPrimary: '#F4F4F5',
+        'controls-primary': '#F4F4F5',
       },
       fontFamily: {
         inter: ['Inter Variable', 'sans-serif'],

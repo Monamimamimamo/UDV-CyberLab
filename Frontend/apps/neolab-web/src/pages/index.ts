@@ -4,6 +4,6 @@ export * from './Auth';
 export * from './Error';
 export * from './Projects';
 export * from './Materials';
-export * from './Event';
 export * from './Lab';
 export * from './Admin';
+export * from './News';

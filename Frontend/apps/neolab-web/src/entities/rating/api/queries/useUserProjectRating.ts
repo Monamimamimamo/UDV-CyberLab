@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { ratingApi } from '../services/ratingApi';
+import { projectRatingApi } from '../services/projectRatingApi';
 
 export const useUserProjectRating = (projectId: string) => {
   return useQuery({
     queryKey: ['rating', projectId],
-    queryFn: async () => await ratingApi.getUserRating(projectId),
+    queryFn: async () => await projectRatingApi.getUserRating(projectId),
     staleTime: 60 * 1000,
   });
 };
