@@ -17,5 +17,6 @@ export const projectSorting: SortingType[] = [
 export enum ProjectSorting {
   new,
   high_rating,
+  high_views,
   name,
 }
