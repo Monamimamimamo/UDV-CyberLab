@@ -11,7 +11,7 @@ type SidebarProps = {
   links: SidebarItemType[];
   withLogout?: boolean;
 };
-
+// TODO Сайдбар нужно как-то на регулярки переделать и протестить /tests/my/* и /test/manage/* и тд
 export const Sidebar = ({ links, withLogout = false }: SidebarProps) => {
   const open = useLogoutModal(state => state.open);
   const isAuthorized = useAuth(state => state.isAuthorized);

@@ -12,7 +12,7 @@ export class AxiosClient {
   private client: AxiosInstance;
 
   private constructor(baseURL: string) {
-    axios.defaults.timeout = 5000;
+    axios.defaults.timeout = 10_000;
     axios.defaults.withCredentials = true;
     axios.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
     axios.defaults.headers.post['Accept'] = 'text/plain';

@@ -18,7 +18,7 @@ export const TitleSelect = memo(
   ({ value, handleDataChange, items, ...props }: TitleSelectProps) => {
     return (
       <Select
-        color="white"
+        color="gray"
         size="sm"
         listboxProps={selectClassNames}
         popoverProps={{

@@ -3,7 +3,7 @@ import { Spinner } from '@/shared/ui';
 import { AdminProjectListWithQuery } from '@/widgets/admin-project-list';
 import { useQueryState } from 'nuqs';
 
-const ProjectsPage = () => {
+const AdminProjectsPage = () => {
   const [search] = useQueryState('search', { defaultValue: '' });
 
   return (
@@ -22,4 +22,4 @@ const ProjectsPage = () => {
   );
 };
 
-export default ProjectsPage;
+export default AdminProjectsPage;

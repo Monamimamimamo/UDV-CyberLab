@@ -27,31 +27,25 @@ export const SettingsInfoUtils = memo(
     return (
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
-          <div className="flex flex-row gap-2 items-center">
+          <div className="flex flex-row items-center gap-2">
             <p>Ограничить количество попыток</p>
             <Switch
               isSelected
               isDisabled
               size="sm"
               classNames={{
-                thumb:
-                  'bg-foreground group-data-[selected=true]:bg-controlsPrimary',
-                wrapper:
-                  'bg-controlsPrimary group-data-[selected=true]:bg-foreground',
+                thumb: 'bg-foreground group-data-[selected=true]:bg-controls-primary',
+                wrapper: 'bg-controls-primary group-data-[selected=true]:bg-foreground',
               }}
               aria-label="Automatic updates"
             />
           </div>
           {isLimited && (
-            <div className="flex flex-row gap-3 items-center">
-              <p className="text-[14px] text-foreground/70">
-                Количество попыток:
-              </p>
+            <div className="flex flex-row items-center gap-3">
+              <p className="text-foreground/70 text-[14px]">Количество попыток:</p>
               <Input
                 value={String(attemptsCount)}
-                onChange={e =>
-                  handleChangeAttemptsCount(Number(e.target.value))
-                }
+                onChange={(e) => handleChangeAttemptsCount(Number(e.target.value))}
                 isRequired
                 color="white"
                 size="sm"
@@ -67,26 +61,22 @@ export const SettingsInfoUtils = memo(
           )}
         </div>
         <div className="flex flex-col gap-1">
-          <div className="flex flex-row gap-2 items-center">
+          <div className="flex flex-row items-center gap-2">
             <p>Ограничить по времени</p>
             <Switch
               isSelected={withTimeLimit}
-              onChange={e => handleChangeWithTimeLimit(e.target.checked)}
+              onChange={(e) => handleChangeWithTimeLimit(e.target.checked)}
               size="sm"
               classNames={{
-                thumb:
-                  'bg-foreground group-data-[selected=true]:bg-controlsPrimary',
-                wrapper:
-                  'bg-controlsPrimary group-data-[selected=true]:bg-foreground',
+                thumb: 'bg-foreground group-data-[selected=true]:bg-controls-primary',
+                wrapper: 'bg-controls-primary group-data-[selected=true]:bg-foreground',
               }}
               aria-label="Automatic updates"
             />
           </div>
           {withTimeLimit && (
-            <div className="flex flex-row gap-3 items-center">
-              <p className="text-[14px] text-foreground/70">
-                Длительность теста:
-              </p>
+            <div className="flex flex-row items-center gap-3">
+              <p className="text-foreground/70 text-[14px]">Длительность теста:</p>
               <TimeInput
                 value={testDuration as any}
                 onChange={(e: any) => {
@@ -98,8 +88,7 @@ export const SettingsInfoUtils = memo(
                 hourCycle={24}
                 size="sm"
                 classNames={{
-                  inputWrapper:
-                    'hover:bg-controls focus-within:hover:bg-controls',
+                  inputWrapper: 'hover:bg-controls focus-within:hover:bg-controls',
                   input: 'text-[16px] text-foreground justify-center',
                 }}
                 aria-label="Длительность теста"
@@ -109,5 +98,5 @@ export const SettingsInfoUtils = memo(
         </div>
       </div>
     );
-  }
+  },
 );

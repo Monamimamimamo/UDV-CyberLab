@@ -27,6 +27,8 @@ export const ModalProjectEdit = ({ projectId }: { projectId: string }) => {
   }
 
   const logoPhoto = parseAndCreateFile(filesData?.logo);
+  // TODO Баг с documentaion = data:undefined;base64,undefined
+  // Стоит попросить заменить на полноценную ссылку, иначе ужасно преобразовывать бинарник в файл
   const documentation = parseAndCreateFile(filesData?.documentation, data.name);
 
   const onEditSubmit = async (formData: ProjectFormInputs) => {
@@ -34,6 +36,7 @@ export const ModalProjectEdit = ({ projectId }: { projectId: string }) => {
     let countDirtyFields = 0;
 
     Object.keys(formData).forEach((key) => {
+      // TODO Отрефакторить этот мусор
       const fieldName = key as keyof ProjectFormInputs;
 
       // TODO: Убрать, кода появятся картинки проекта

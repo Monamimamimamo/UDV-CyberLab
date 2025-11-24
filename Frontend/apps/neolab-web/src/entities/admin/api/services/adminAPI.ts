@@ -23,6 +23,10 @@ class AdminApi {
       },
     });
   }
+
+  public async deleteNews(newsId: string) {
+    return await axiosClient.delete(`/api/NewsCard?id=${newsId}`);
+  }
 }
 
 export const adminApi = new AdminApi();

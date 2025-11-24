@@ -32,7 +32,7 @@ export const EditTestSelect = () => {
     <Select
       size="sm"
       radius="md"
-      color="secondary"
+      color="white"
       listboxProps={{
         itemClasses: {
           base: 'data-[hover=true]:bg-[#CDCDE3] data-[selectable=true]:focus:text-foreground data-[hover=true]:text-foreground data-[selectable=true]:focus:bg-[#CDCDE3] !outline-none',

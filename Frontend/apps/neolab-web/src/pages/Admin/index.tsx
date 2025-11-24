@@ -1,7 +1,14 @@
 import type { RouteObject } from 'react-router-dom';
 import { AdminLayout } from './layouts/AdminLayout';
 import { DevelopmentPage } from '../Error';
-import { ProjectsPage, UsersPage } from './routes';
+import {
+  NewsCreatePage,
+  NewsEditPage,
+  NewsPage,
+  NewsPreviewPage,
+  ProjectsPage,
+  UsersPage,
+} from './routes';
 
 export const adminRoutes: RouteObject[] = [
   {
@@ -24,8 +31,25 @@ export const adminRoutes: RouteObject[] = [
         element: <DevelopmentPage />,
       },
       {
-        path: '/admin/news',
-        element: <DevelopmentPage />,
+        path: '/admin',
+        children: [
+          {
+            path: '/admin/news',
+            element: <NewsPage />,
+          },
+          {
+            path: '/admin/news/create',
+            element: <NewsCreatePage />,
+          },
+          {
+            path: '/admin/news/:newsId',
+            element: <NewsPreviewPage />,
+          },
+          {
+            path: '/admin/news/:newsId/edit',
+            element: <NewsEditPage />,
+          },
+        ],
       },
       {
         path: '/admin/education-materials',

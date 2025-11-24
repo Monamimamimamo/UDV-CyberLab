@@ -6,6 +6,5 @@ export const useProjectComments = (projectId: string) => {
     queryKey: ['comments', projectId],
     queryFn: async () => await commentApi.getByProjectId(projectId),
     staleTime: 5 * 1000,
-    refetchInterval: 10 * 1000,
   });
 };

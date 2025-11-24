@@ -1,15 +1,11 @@
-import {
-  extendVariants,
-  Textarea as TextareaNextUI,
-  type TextAreaProps,
-} from '@heroui/react';
+import { extendVariants, Textarea as TextareaNextUI, type TextAreaProps } from '@heroui/react';
 
 export const Textarea = extendVariants(TextareaNextUI, {
   variants: {
     color: {
       white: {
         inputWrapper:
-          'bg-controlsPrimary data-[hover=true]:bg-controls group-data-[focus=true]:bg-controls',
+          'bg-controls-primary data-[hover=true]:bg-controls group-data-[focus=true]:bg-controls',
         label: 'text-foreground',
         input:
           'placeholder:text-foreground focus:placeholder:text-[#A2A4C2] group-data-[has-value=true]:text-foreground !text-foreground',

@@ -19,6 +19,5 @@ export const useTestList = ({
         difficulty,
       }),
     staleTime: 2000,
-    refetchInterval: 5000,
   });
 };

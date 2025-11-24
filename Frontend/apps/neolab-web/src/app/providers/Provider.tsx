@@ -4,13 +4,14 @@ import { HeroUIProvider } from '@heroui/react';
 import { ErrorProvider } from './ErrorProvider';
 import { QueryProvider } from './QueryProvider';
 import { NuqsAdapter } from 'nuqs/adapters/react';
+import { ToastProvider } from '@heroui/toast';
 import { Spinner } from '@/shared/ui';
 
 export const Provider = ({ children }: { children: React.ReactNode }) => {
   return (
     <ErrorProvider>
-      <QueryProvider>
-        <HeroUIProvider>
+      <HeroUIProvider>
+        <QueryProvider>
           <NuqsAdapter>
             <BrowserRouter>
               <Suspense
@@ -25,8 +26,9 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
               </Suspense>
             </BrowserRouter>
           </NuqsAdapter>
-        </HeroUIProvider>
-      </QueryProvider>
+        </QueryProvider>
+        <ToastProvider placement="bottom-right" />
+      </HeroUIProvider>
     </ErrorProvider>
   );
 };

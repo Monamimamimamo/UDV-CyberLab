@@ -20,7 +20,7 @@ export const QuestionTypeEdit = memo(
     return (
       <div className="mb-[13px] flex flex-row items-center justify-between">
         <Select
-          color="white"
+          color="gray"
           aria-label="Тип вопроса"
           size="sm"
           listboxProps={selectClassNames}

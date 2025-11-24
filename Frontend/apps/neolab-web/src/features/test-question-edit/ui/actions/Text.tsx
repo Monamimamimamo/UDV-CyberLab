@@ -23,9 +23,9 @@ export const TextAction = ({
           size="sm"
           classNames={{
             thumb:
-              'bg-foreground group-data-[selected=true]:bg-controlsPrimary',
+              'bg-foreground group-data-[selected=true]:bg-controls-primary',
             wrapper:
-              'bg-controlsPrimary group-data-[selected=true]:bg-foreground',
+              'bg-controls-primary group-data-[selected=true]:bg-foreground',
           }}
           aria-label="Automatic updates"
         />
