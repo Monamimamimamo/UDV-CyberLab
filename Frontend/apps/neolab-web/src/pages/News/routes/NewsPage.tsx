@@ -1,6 +1,7 @@
 import { QueryBoundary } from '@/shared/common/components';
 import { Spinner } from '@/shared/ui';
 import { AdminNewsFilters } from '@/widgets/admin-news-filters';
+import { NewsListWithQuery } from '@/widgets/news-list/ui/NewsListWithQuery';
 import { useQueryState } from 'nuqs';
 
 const NewsPage = () => {
@@ -16,9 +17,7 @@ const NewsPage = () => {
           </div>
         }
       >
-        <ul>
-          <li>123</li>
-        </ul>
+        <NewsListWithQuery />
       </QueryBoundary>
     </section>
   );

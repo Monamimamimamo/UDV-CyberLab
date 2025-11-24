@@ -1,4 +1,4 @@
-import { newsDefaultSorting } from '@/entities/sorting';
+import { projectSorting } from '@/entities/sorting';
 import { NewsCreateButton } from '@/features/news-create-button';
 import { useMediaQuery } from '@/shared/hooks';
 import { SearchInput, StickyElement } from '@/shared/ui';
@@ -70,14 +70,14 @@ export const AdminNewsFilters = ({
               value: 'text-[14px] text-foreground/50',
             }}
           >
-            {newsDefaultSorting.map(({ label, key }) => (
+            {projectSorting.map(({ label, key }) => (
               <SelectItem key={key}>{label}</SelectItem>
             ))}
           </Select>
         </div>
         {withCreateButton && (
           <div className="bg-background mt-3 w-full self-end rounded-xl drop-shadow-md sm:mt-0 sm:w-auto">
-            <NewsCreateButton onCliсk={() => console.log(1)} />
+            <NewsCreateButton />
           </div>
         )}
       </div>

@@ -27,7 +27,7 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
             </BrowserRouter>
           </NuqsAdapter>
         </QueryProvider>
-        <ToastProvider placement="top-right" />
+        <ToastProvider placement="bottom-right" />
       </HeroUIProvider>
     </ErrorProvider>
   );

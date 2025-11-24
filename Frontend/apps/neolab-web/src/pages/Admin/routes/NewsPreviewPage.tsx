@@ -8,11 +8,11 @@ const NewsPreviewPage = () => {
   const { data } = useSuspenseNewsDetails(newsId);
 
   return (
-    <section className="mx-auto mt-6 mb-20 flex w-full flex-col items-start gap-1 sm:max-w-[712px]">
+    <section className="mb-20 flex w-full flex-col items-start gap-1 sm:max-w-[712px]">
       <div className="mb-2 flex w-full flex-row justify-between">
-        <BackButton to="/news" />
+        <BackButton to="/admin/news" />
       </div>
-      <div className='w-full'>
+      <div className="w-full">
         <NewsDetails details={data} />
         {/* TODO Комментарии/Рейтинг */}
       </div>
