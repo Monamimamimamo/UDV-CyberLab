@@ -6,6 +6,5 @@ export const useMyProjectList = () => {
     queryKey: ['my/projects'],
     queryFn: projectApi.getAllMy,
     staleTime: 2000,
-    refetchInterval: 5000,
   });
 };

@@ -6,6 +6,5 @@ export const useUserList = ({ search }: { search?: string }) => {
     queryKey: ['users', { search }],
     queryFn: async () => await adminApi.getUsers({ search }),
     staleTime: 2000,
-    refetchInterval: 5000,
   });
 };

@@ -6,6 +6,5 @@ export const useMyTestList = () => {
     queryKey: ['tests', { my: true }],
     queryFn: testApi.getMyTests,
     staleTime: 2000,
-    refetchInterval: 5000,
   });
 };

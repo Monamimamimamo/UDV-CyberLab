@@ -12,6 +12,5 @@ export const useProjectList = ({
     queryKey: ['projects', { sortOrder, search }],
     queryFn: async () => await projectApi.getAll({ sortOrder, search }),
     staleTime: 2000,
-    refetchInterval: 5000,
   });
 };
