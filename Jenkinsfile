@@ -55,8 +55,10 @@ pipeline {
         stage('Checkout') {
             steps {
                 sh '''
-                cd /UDV-CyberLab
+                    git config --global --add safe.directory ${WORKSPACE}
+                    cd ${WORKSPACE}
                     git pull
+                    git status
                 '''
             }
         }
@@ -79,9 +81,9 @@ pipeline {
             }
             steps {
                 sh '''
-                cd /UDV-CyberLab
-                echo "ASPNETCORE_ENVIRONMENT = $ASPNETCORE_ENVIRONMENT"
-                   docker compose up -d --build
+                    cd ${WORKSPACE}
+                    echo "ASPNETCORE_ENVIRONMENT = $ASPNETCORE_ENVIRONMENT"
+                    docker compose up -d --build
                 '''
             }
         }
@@ -89,7 +91,7 @@ pipeline {
         stage('Deploy Nginx Configuration') {
             steps {
                 sh '''
-                    cd /UDV-CyberLab
+                    cd ${WORKSPACE}
                     sed 's/\${DOMAIN}/'${DOMAIN}'/g' nginx/nginx.conf > /tmp/nginx.conf
                     sudo cp /tmp/nginx.conf /etc/nginx/sites-available/${DOMAIN}
                     sudo ln -sf /etc/nginx/sites-available/${DOMAIN} /etc/nginx/sites-enabled/
