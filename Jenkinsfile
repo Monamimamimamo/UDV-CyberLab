@@ -91,9 +91,10 @@ pipeline {
                 sh '''
                     cd ${WORKSPACE}
                     sudo rm -rf /etc/nginx/sites-enabled/*
-                    sed "s/\${DOMAIN}/$DOMAIN/g" nginx/nginx.conf > ${WORKSPACE}/nginx.conf.tmp
-                    sudo cp ${WORKSPACE}/nginx.conf.tmp /etc/nginx/sites-available/${DOMAIN}
-                    sudo ln -sf /etc/nginx/sites-available/${DOMAIN} /etc/nginx/sites-enabled/
+                    DOMAIN_VALUE="${DOMAIN}"
+                    sed "s|\\${DOMAIN}|${DOMAIN_VALUE}|g" nginx/nginx.conf > ${WORKSPACE}/nginx.conf.tmp
+                    sudo cp ${WORKSPACE}/nginx.conf.tmp /etc/nginx/sites-available/${DOMAIN_VALUE}
+                    sudo ln -sf /etc/nginx/sites-available/${DOMAIN_VALUE} /etc/nginx/sites-enabled/
                     sudo rm -f /etc/nginx/sites-enabled/default
                     rm -f ${WORKSPACE}/nginx.conf.tmp
                     sudo nginx -t
