@@ -90,10 +90,12 @@ pipeline {
             steps {
                 sh '''
                     cd ${WORKSPACE}
-                    sed 's/\${DOMAIN}/'${DOMAIN}'/g' nginx/nginx.conf > /tmp/nginx.conf
-                    sudo cp /tmp/nginx.conf /etc/nginx/sites-available/${DOMAIN}
+                    sudo rm -rf /etc/nginx/sites-enabled/*
+                    sed "s/\${DOMAIN}/$DOMAIN/g" nginx/nginx.conf > ${WORKSPACE}/nginx.conf.tmp
+                    sudo cp ${WORKSPACE}/nginx.conf.tmp /etc/nginx/sites-available/${DOMAIN}
                     sudo ln -sf /etc/nginx/sites-available/${DOMAIN} /etc/nginx/sites-enabled/
                     sudo rm -f /etc/nginx/sites-enabled/default
+                    rm -f ${WORKSPACE}/nginx.conf.tmp
                     sudo nginx -t
                     sudo systemctl reload nginx
                 '''
