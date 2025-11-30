@@ -55,10 +55,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 sh '''
-                    git config --global --add safe.directory ${WORKSPACE}
                     cd ${WORKSPACE}
-                    git pull
-                    git status
+                    cat docker-compose.yml 
                 '''
             }
         }
