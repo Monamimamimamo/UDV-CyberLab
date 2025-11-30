@@ -81,16 +81,6 @@ pipeline {
                 sh '''
                     cd ${WORKSPACE}
                     echo "ASPNETCORE_ENVIRONMENT = $ASPNETCORE_ENVIRONMENT"
-                    echo "=== SMTP Settings ==="
-                    echo "SMTP_SERVER_VAR = $SMTP_SERVER_VAR"
-                    echo "SMTP_PORT_VAR = $SMTP_PORT_VAR"
-                    echo "SMTP_SENDER_NAME_VAR = $SMTP_SENDER_NAME_VAR"
-                    echo "SMTP_SENDER_EMAIL_VAR = $SMTP_SENDER_EMAIL_VAR"
-                    echo "SMTP_USERNAME_VAR = $SMTP_USERNAME_VAR"
-                    echo "SMTP_PASSWORD_VAR = [MASKED - length: ${#SMTP_PASSWORD_VAR}]"
-                    echo "CLIENT_EMAIL_CONFIRMATION_URL_VAR = $CLIENT_EMAIL_CONFIRMATION_URL_VAR"
-                    echo "CLIENT_PASSWORD_RESET_URL_VAR = $CLIENT_PASSWORD_RESET_URL_VAR"
-                    echo "====================="
                     docker compose up -d --build
                 '''
             }
@@ -109,6 +99,7 @@ pipeline {
                     rm -f ${WORKSPACE}/nginx.conf.tmp
                     sudo nginx -t
                     sudo systemctl reload nginx
+                    docker exec udv-cyberlab-identity-1 printenv | sort || echo "Container not ready yet"
                 '''
             }
         }
