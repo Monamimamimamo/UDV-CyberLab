@@ -13,6 +13,14 @@ services:
     environment:
       - ConnectionStrings__DefaultConnection=User ID=postgres;Password=123;Host=db;Port=5432;Database=identityNEOLab;Pooling=true;
       - ASPNETCORE_ENVIRONMENT=Development
+      - SmtpSettings__Server=${SMTP_SERVER_VAR}
+      - SmtpSettings__Port=${SMTP_PORT_VAR}
+      - SmtpSettings__SenderName=${SMTP_SENDER_NAME_VAR}
+      - SmtpSettings__SenderEmail=${SMTP_SENDER_EMAIL_VAR}
+      - SmtpSettings__Username=${SMTP_USERNAME_VAR}
+      - SmtpSettings__Password=${SMTP_PASSWORD_VAR}
+      - ClientAppSettings__EmailConfirmationUrl=${CLIENT_EMAIL_CONFIRMATION_URL_VAR}
+      - ClientAppSettings__PasswordResetUrl=${CLIENT_PASSWORD_RESET_URL_VAR}
     networks:
       - database
     restart: always
@@ -68,6 +76,26 @@ services:
         condition: service_healthy
     environment:
       - ConnectionStrings__DefaultConnection=User ID=postgres;Password=123;Host=news-db;Port=5432;Database=newsNEOLab;Pooling=true;
+      - ASPNETCORE_ENVIRONMENT=Development
+      - YandexStorage__BucketName=${YANDEX_BUCKET_NAME}
+      - YandexStorage__ServiceUrl=${YANDEX_SERVICE_URL}
+      - YandexStorage__AccessKey=${YANDEX_ACCESS_KEY}
+      - YandexStorage__SecretKey=${YANDEX_SECRET_KEY}
+    networks:
+      - database
+    restart: always
+
+  learnmaterials:
+    build:
+      context: .
+      dockerfile: Api/LearnMaterials/Api/Dockerfile
+    ports:
+      - "5158:5158"
+    depends_on:
+      learnmaterials-db:
+        condition: service_healthy
+    environment:
+      - ConnectionStrings__DefaultConnection=User ID=postgres;Password=123;Host=learnmaterials-db;Port=5432;Database=learnmaterialsNEOLab;Pooling=true;
       - ASPNETCORE_ENVIRONMENT=Development
       - YandexStorage__BucketName=${YANDEX_BUCKET_NAME}
       - YandexStorage__ServiceUrl=${YANDEX_SERVICE_URL}
@@ -157,6 +185,26 @@ services:
       timeout: 5s
       retries: 5
 
+  learnmaterials-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: learnmaterialsNEOLab
+    volumes:
+      - learnmaterials_postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: >
+      postgres
+      -c shared_preload_libraries=pg_stat_statements
+    networks:
+      - database
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   prometheus:
     image: prom/prometheus:latest
     ports:
@@ -213,6 +261,7 @@ volumes:
   tests_postgres_data:
   projects_postgres_data:
   news_postgres_data:
+  learnmaterials_postgres_data:
   grafana-storage:
 
 networks:

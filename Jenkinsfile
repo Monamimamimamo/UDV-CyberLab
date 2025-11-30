@@ -8,6 +8,14 @@ pipeline {
         YANDEX_SECRET_KEY = credentials('YANDEX_SECRET_KEY')
         DOMAIN = credentials('DOMAIN')
         SSL_EMAIL = credentials('SSL_EMAIL')
+        SMTP_SERVER = credentials('SMTP_SERVER')
+        SMTP_PORT = credentials('SMTP_PORT')
+        SMTP_SENDER_NAME = credentials('SMTP_SENDER_NAME')
+        SMTP_SENDER_EMAIL = credentials('SMTP_SENDER_EMAIL')
+        SMTP_USERNAME = credentials('SMTP_USERNAME')
+        SMTP_PASSWORD = credentials('SMTP_PASSWORD')
+        CLIENT_EMAIL_CONFIRMATION_URL = credentials('CLIENT_EMAIL_CONFIRMATION_URL')
+        CLIENT_PASSWORD_RESET_URL = credentials('CLIENT_PASSWORD_RESET_URL')
     }
 
     stages {
@@ -38,7 +46,7 @@ pipeline {
             steps {
                 sh '''
                     sudo chmod 666 /var/run/docker.sock
-                    docker rm -f udv-cyberlab-tests-1 udv-cyberlab-identity-1 udv-cyberlab-projects-1 udv-cyberlab-news-1
+                    docker rm -f udv-cyberlab-tests-1 udv-cyberlab-identity-1 udv-cyberlab-projects-1 udv-cyberlab-news-1 udv-cyberlab-learnmaterials-1
                     docker system prune -af --volumes
                 '''
             }
@@ -60,6 +68,14 @@ pipeline {
                 YC_SERVICE_URL = "${YANDEX_SERVICE_URL}"
                 YC_ACCESS_KEY = "${YANDEX_ACCESS_KEY}"
                 YC_SECRET_KEY = "${YANDEX_SECRET_KEY}"
+                SMTP_SERVER_VAR = "${SMTP_SERVER}"
+                SMTP_PORT_VAR = "${SMTP_PORT}"
+                SMTP_SENDER_NAME_VAR = "${SMTP_SENDER_NAME}"
+                SMTP_SENDER_EMAIL_VAR = "${SMTP_SENDER_EMAIL}"
+                SMTP_USERNAME_VAR = "${SMTP_USERNAME}"
+                SMTP_PASSWORD_VAR = "${SMTP_PASSWORD}"
+                CLIENT_EMAIL_CONFIRMATION_URL_VAR = "${CLIENT_EMAIL_CONFIRMATION_URL}"
+                CLIENT_PASSWORD_RESET_URL_VAR = "${CLIENT_PASSWORD_RESET_URL}"
             }
             steps {
                 sh '''
