@@ -1,8 +1,10 @@
 import { newPasswordSchema, useResetPassword } from '@/entities/user';
 import { Button, PasswordInput, Spinner } from '@/shared/ui';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { addToast } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AxiosError } from 'axios';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { z } from 'zod';
 
 type NewPasswordType = z.infer<typeof newPasswordSchema>;
@@ -41,11 +43,22 @@ export const NewPasswordForm = () => {
       .then(() => {
         navigate('/new-password/success');
       })
+      .catch((err: AxiosError<{ message: string }>) => {
+        if (err.response?.status === 400 && err.response?.data?.message) {
+          const errorMessage = err.response.data.message;
+          addToast({
+            title: 'Ошибка',
+            description: errorMessage,
+            color: 'danger',
+            timeout: 4000,
+          });
+        }
+      })
       .finally(onReset);
   };
 
   const isPasswordError = errors.password !== undefined || Boolean(error);
-  const isRetryPasswordError = errors.retryPassword !== undefined;
+  const isRetryPasswordError = errors.retryPassword !== undefined || Boolean(error);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
@@ -56,7 +69,7 @@ export const NewPasswordForm = () => {
         render={({ field }) => (
           <PasswordInput
             isInvalid={isPasswordError}
-            errorMessage={errors.password?.message || error?.message}
+            errorMessage={errors.password?.message}
             {...field}
             label="Password"
             placeholder="Введите новый пароль"

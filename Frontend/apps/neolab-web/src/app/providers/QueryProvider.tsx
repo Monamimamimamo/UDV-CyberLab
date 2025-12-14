@@ -1,8 +1,11 @@
-import { QueryClientProvider, QueryClient, MutationCache } from '@tanstack/react-query';
 import { addToast } from '@heroui/react';
+import { MutationCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const mutationCache = new MutationCache({
-  onError: () => {
+  onError: (error, variables, context, mutation) => {
+    if (mutation?.meta?.skipGlobalError) {
+      return;
+    }
     addToast({
       title: 'Ошибка',
       description: 'Что-то пошло не так',
