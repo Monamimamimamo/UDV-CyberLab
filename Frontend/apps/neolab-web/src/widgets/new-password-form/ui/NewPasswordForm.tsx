@@ -1,6 +1,6 @@
-import { newPasswordSchema } from '@/entities/user';
-import { Button, PasswordInput } from '@/shared/ui';
-import { Link } from 'react-router-dom';
+import { newPasswordSchema, useResetPassword } from '@/entities/user';
+import { Button, PasswordInput, Spinner } from '@/shared/ui';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -8,7 +8,12 @@ import { z } from 'zod';
 type NewPasswordType = z.infer<typeof newPasswordSchema>;
 
 export const NewPasswordForm = () => {
-  // const { login, isPending, error } = useLogin();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { resetPassword, isPending, error } = useResetPassword();
+
+  const email = searchParams.get('email');
+  const token = searchParams.get('token');
 
   const {
     handleSubmit,
@@ -24,15 +29,23 @@ export const NewPasswordForm = () => {
   };
 
   const onSubmit: SubmitHandler<NewPasswordType> = (data) => {
-    console.log(data);
-    onReset();
+    if (!email || !token) {
+      return;
+    }
 
-    // login({ ...data, role: Number(userRole) }).finally(onReset);
+    resetPassword({
+      email,
+      token,
+      newPassword: data.password,
+    })
+      .then(() => {
+        navigate('/new-password/success');
+      })
+      .finally(onReset);
   };
 
-  const isPasswordError = errors.password !== undefined;
+  const isPasswordError = errors.password !== undefined || Boolean(error);
   const isRetryPasswordError = errors.retryPassword !== undefined;
-  // TODO  || Boolean(error)
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
@@ -43,7 +56,7 @@ export const NewPasswordForm = () => {
         render={({ field }) => (
           <PasswordInput
             isInvalid={isPasswordError}
-            errorMessage={errors.password?.message}
+            errorMessage={errors.password?.message || error?.message}
             {...field}
             label="Password"
             placeholder="Введите новый пароль"
@@ -72,10 +85,10 @@ export const NewPasswordForm = () => {
 
       <Button
         color="gradient"
-        // startContent={isPending ? <Spinner size="sm" color="white" /> : null}
+        startContent={isPending ? <Spinner size="sm" color="white" /> : null}
         type="submit"
         fullWidth
-        // isDisabled={isPending}
+        isDisabled={isPending || !email || !token}
       >
         Сохранить
       </Button>
