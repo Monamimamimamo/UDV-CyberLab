@@ -12,7 +12,7 @@ export const useRegister = () => {
     mutationKey: ['auth/register'],
     mutationFn: authApi.register,
     onSuccess: () => {
-      navigate('/login');
+      navigate('/registration/success');
     },
     onError: (error: ErrorResponse) => {
       if (error.status === 400) {
