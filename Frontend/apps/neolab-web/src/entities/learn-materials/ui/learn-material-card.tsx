@@ -1,5 +1,4 @@
-import { ProjectStats } from '@/entities/project/ui/ProjectStats';
-import { Card, Rating } from '@/shared/ui';
+import { Card } from '@/shared/ui';
 import { Image } from '@heroui/react';
 import { useCallback } from 'react';
 import { useLearnMaterialFileSrc } from '../api/learn-materials.queries';
@@ -11,8 +10,15 @@ type LearnMaterialCardProps = {
   actionSlot?: React.ReactNode;
 };
 
-export const LearnMaterialCard = ({ learnMaterial, onClick, actionSlot }: LearnMaterialCardProps) => {
-  const { data: imgSrc, isLoading } = useLearnMaterialFileSrc(learnMaterial.logoPath, learnMaterial.id);
+export const LearnMaterialCard = ({
+  learnMaterial,
+  onClick,
+  actionSlot,
+}: LearnMaterialCardProps) => {
+  const { data: imgSrc, isLoading } = useLearnMaterialFileSrc(
+    learnMaterial.logoPath,
+    learnMaterial.id,
+  );
 
   const handleKeyPress = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -47,17 +53,7 @@ export const LearnMaterialCard = ({ learnMaterial, onClick, actionSlot }: LearnM
           <p className="line-clamp-2 text-sm font-medium">{learnMaterial.name}</p>
           <p className="mt-1 line-clamp-3 text-xs">{learnMaterial.shortDescription}</p>
         </div>
-        <div className="mt-auto flex flex-col">
-          <div className="flex items-center justify-between">
-            <Rating value={learnMaterial.rating} readOnly />
-            {actionSlot}
-          </div>
-          <ProjectStats
-            views={learnMaterial.viewsCount}
-            comments={learnMaterial.commentsCount}
-            className="mt-2"
-          />
-        </div>
+        <div className="absolute top-2 right-2 z-10">{actionSlot}</div>
       </div>
     </Card>
   );

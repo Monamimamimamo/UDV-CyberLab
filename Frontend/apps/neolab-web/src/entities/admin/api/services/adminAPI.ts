@@ -27,6 +27,10 @@ class AdminApi {
   public async deleteNews(newsId: string) {
     return await axiosClient.delete(`/api/NewsCard?id=${newsId}`);
   }
+
+  public async deleteLearnMaterials(materialId: string) {
+    return await axiosClient.delete(`/api/LearnMaterialsCard?id=${materialId}`);
+  }
 }
 
 export const adminApi = new AdminApi();

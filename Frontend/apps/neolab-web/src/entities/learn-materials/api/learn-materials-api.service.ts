@@ -8,7 +8,7 @@ import type { GetAllLearnMaterialsParams } from '../models/query-params';
 
 class LearnMaterialsApiService {
   public async getAll(params: GetAllLearnMaterialsParams): Promise<LearnMaterialCardDto[]> {
-    return await axiosClient.get('/api/LearnMaterialCard/allShort', {
+    return await axiosClient.get('/api/LearnMaterialsCard/allShort', {
       params: {
         sortOrder: params.sortOrder,
         searchQuery: params.search,
@@ -17,7 +17,7 @@ class LearnMaterialsApiService {
   }
 
   public async getDetailsById(id: string): Promise<LearnMaterialDetailsDto> {
-    return await axiosClient.get(`/api/LearnMaterialCard/${id}`);
+    return await axiosClient.get(`/api/LearnMaterialsCard/${id}`);
   }
 
   public async create(body: CreateLearnMaterialDto): Promise<string> {
@@ -31,7 +31,7 @@ class LearnMaterialsApiService {
     fm.append('URL', body.url);
     fm.append('LogoPhoto', body.logoPhoto);
 
-    return await axiosClient.post('/api/LearnMaterialCard', fm, fileConfig);
+    return await axiosClient.post('/api/LearnMaterialsCard', fm, fileConfig);
   }
 
   public async update(body: UpdateLearnMaterialDto): Promise<string> {
@@ -47,11 +47,11 @@ class LearnMaterialsApiService {
     if (body.url) fm.append('URL', body.url);
     if (body.logoPhoto) fm.append('LogoPhoto', body.logoPhoto);
 
-    return await axiosClient.put('/api/LearnMaterialCard', fm, fileConfig);
+    return await axiosClient.put('/api/LearnMaterialsCard', fm, fileConfig);
   }
 
   public async delete(id: string): Promise<void> {
-    await axiosClient.delete(`/api/LearnMaterialCard/${id}`);
+    await axiosClient.delete(`/api/LearnMaterialsCard/${id}`);
   }
 
   public async getFile(path: string): Promise<string> {

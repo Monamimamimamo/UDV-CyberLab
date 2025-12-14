@@ -2,7 +2,7 @@ import { addToast } from '@heroui/react';
 import { MutationCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const mutationCache = new MutationCache({
-  onError: (error, variables, context, mutation) => {
+  onError: (_error, _variables, _context, mutation) => {
     if (mutation?.meta?.skipGlobalError) {
       return;
     }

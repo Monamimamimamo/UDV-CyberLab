@@ -1,6 +1,10 @@
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import type { GetAllLearnMaterialsParams } from '../models/query-params';
-import { createLearnMaterialDetailsConfig, getLearnMaterialFile, getLearnMaterialList } from './learn-materials.config';
+import {
+  createLearnMaterialDetailsConfig,
+  getLearnMaterialFile,
+  getLearnMaterialList,
+} from './learn-materials.config';
 
 export const useSuspenseLearnMaterialDetails = (id: string) => {
   return useSuspenseQuery(createLearnMaterialDetailsConfig(id));

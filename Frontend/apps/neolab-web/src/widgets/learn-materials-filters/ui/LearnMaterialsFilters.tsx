@@ -1,5 +1,5 @@
 import { projectSorting } from '@/entities/sorting';
-import { NewsCreateButton } from '@/features/news-create-button';
+import { LearnMaterialCreateButton } from '@/features/learn-material-create-button';
 import { useMediaQuery } from '@/shared/hooks';
 import { SearchInput, StickyElement } from '@/shared/ui';
 
@@ -13,22 +13,16 @@ const selectClassNames = {
   },
 };
 
-type NewsSelectProps = {
-  sort: string;
-  setSort: (value: string) => void;
-};
-
-type AdminNewsFilters = {
+type LearnMaterialsFilters = {
   withCreateButton?: boolean;
   fullPage?: boolean;
 };
 
-export const AdminNewsFilters = ({
-  sort,
-  setSort,
+export const LearnMaterialsFilters = ({
   withCreateButton = false,
   fullPage = false,
-}: NewsSelectProps & AdminNewsFilters) => {
+}: LearnMaterialsFilters) => {
+  const [sort, setSort] = useQueryState('sort', { defaultValue: '' });
   const [search, setSearch] = useQueryState('search', { defaultValue: '' });
   const isTablet = useMediaQuery({ query: '(max-width: 1024px)' });
 
@@ -46,7 +40,7 @@ export const AdminNewsFilters = ({
         classNames={{
           inputWrapper: 'h-[52px]',
         }}
-        placeholder="Поиск новости..."
+        placeholder="Поиск учебного материала..."
       />
       <div
         className={clsx(
@@ -77,7 +71,7 @@ export const AdminNewsFilters = ({
         </div>
         {withCreateButton && (
           <div className="bg-background mt-3 w-full self-end rounded-xl drop-shadow-md sm:mt-0 sm:w-auto">
-            <NewsCreateButton />
+            <LearnMaterialCreateButton />
           </div>
         )}
       </div>
