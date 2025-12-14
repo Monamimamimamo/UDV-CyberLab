@@ -1,14 +1,22 @@
 import { Card } from '@/shared/ui';
-import { Image } from '@heroui/react';
-import { useCallback } from 'react';
+import { Image, Chip } from '@heroui/react';
+import { useCallback, useMemo } from 'react';
 import { useLearnMaterialFileSrc } from '../api/learn-materials.queries';
 import type { LearnMaterialCardDto } from '../dtos/learn-material-card.dto';
+import clsx from 'clsx';
 
 type LearnMaterialCardProps = {
   onClick?: () => void;
   learnMaterial: LearnMaterialCardDto;
   actionSlot?: React.ReactNode;
 };
+
+const getMaterialType = (type: string) =>
+  ({
+    video: 'Видео',
+    article: 'Статья',
+    document: 'Документ',
+  })[type];
 
 export const LearnMaterialCard = ({
   learnMaterial,
@@ -27,6 +35,11 @@ export const LearnMaterialCard = ({
       }
     },
     [onClick],
+  );
+
+  const materialType = useMemo(
+    () => getMaterialType(learnMaterial.publicationType),
+    [learnMaterial.publicationType],
   );
 
   return (
@@ -51,8 +64,15 @@ export const LearnMaterialCard = ({
       <div className="flex h-full flex-col gap-[10px] px-4 py-4">
         <div>
           <p className="line-clamp-2 text-sm font-medium">{learnMaterial.name}</p>
-          <p className="mt-1 line-clamp-3 text-xs">{learnMaterial.shortDescription}</p>
+          <p className={clsx('mt-1 text-xs', materialType ? 'line-clamp-4' : 'line-clamp-6')}>
+            {learnMaterial.shortDescription}
+          </p>
         </div>
+        {materialType && (
+          <div className="mt-auto">
+            <Chip color="primary">{materialType}</Chip>
+          </div>
+        )}
         <div className="absolute top-2 right-2 z-10">{actionSlot}</div>
       </div>
     </Card>
