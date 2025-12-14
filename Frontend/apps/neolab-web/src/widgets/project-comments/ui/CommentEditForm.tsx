@@ -1,4 +1,4 @@
-import { CommentDetails, type CommentDTO, useUpdateComment } from '@/entities/comment';
+import { CommentDetails, type CommentDTO, useUpdateProjectComment } from '@/entities/comment';
 import { Button, Card, Textarea, UserImage } from '@/shared/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
@@ -19,7 +19,7 @@ type CommentActionsProps = {
 };
 
 export const CommentEditForm = ({ comment, onExit }: CommentActionsProps) => {
-  const { mutateAsync: updateComment, isPending } = useUpdateComment();
+  const { mutateAsync: updateComment, isPending } = useUpdateProjectComment();
 
   const {
     handleSubmit,

@@ -7,6 +7,7 @@ export const useUpdateProject = () => {
     mutationKey: ['project/update'],
     mutationFn: projectApi.update,
     onSuccess: (id: string) => {
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
       queryClient.invalidateQueries({ queryKey: ['file', id] });
       queryClient.invalidateQueries({ queryKey: ['projects', id] });
       queryClient.invalidateQueries({ queryKey: ['files', id] });

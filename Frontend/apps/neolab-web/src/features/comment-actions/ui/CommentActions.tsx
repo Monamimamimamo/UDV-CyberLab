@@ -1,7 +1,7 @@
 import { Divider } from '@heroui/react';
 import { CommentActionButton } from './CommentActionButton';
 import { MdDelete, MdModeEdit } from 'react-icons/md';
-import { type CommentDTO, useDeleteComment } from '@/entities/comment';
+import { type CommentDTO, useDeleteProjectComment } from '@/entities/comment';
 import { useModerationDeleteComment } from '@/entities/admin';
 import { useUser } from '@/entities/user';
 
@@ -20,7 +20,7 @@ export const CommentActions = ({ comment, onEdit }: CommentActionsProps) => {
 };
 
 const OwnerActions = ({ comment, onEdit }: CommentActionsProps) => {
-  const { mutateAsync: deleteComment, isPending: isDeletePending } = useDeleteComment();
+  const { mutateAsync: deleteComment, isPending: isDeletePending } = useDeleteProjectComment();
 
   return (
     <div>

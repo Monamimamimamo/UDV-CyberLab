@@ -4,7 +4,7 @@ import type { UserInfo } from '@/shared/types';
 type GetUsersParams = { search?: string };
 
 class AdminApi {
-  public async deleteComment(commentId: string): Promise<boolean> {
+  public async deleteProjectComment(commentId: string): Promise<boolean> {
     return await axiosClient.delete(`/api/Admin/comment/${commentId}`);
   }
 
