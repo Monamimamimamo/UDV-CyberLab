@@ -36,7 +36,7 @@ export const mobileNav = [
       { label: 'Витрина проектов', path: '/admin/projects' },
       { label: 'Тесты', path: '/admin/tests' },
       { label: 'Новости', path: '/admin/news' },
-      { label: 'Учебные материалы', path: '/admin/education-materials' },
+      { label: 'Учебные материалы', path: '/admin/learn-materials' },
     ],
   },
 ];

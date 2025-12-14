@@ -2,6 +2,10 @@ import type { RouteObject } from 'react-router-dom';
 import { AdminLayout } from './layouts/AdminLayout';
 import { DevelopmentPage } from '../Error';
 import {
+  LearnMaterialsCreatePage,
+  LearnMaterialsEditPage,
+  LearnMaterialsPage,
+  LearnMaterialsPreviewPage,
   NewsCreatePage,
   NewsEditPage,
   NewsPage,
@@ -52,8 +56,25 @@ export const adminRoutes: RouteObject[] = [
         ],
       },
       {
-        path: '/admin/education-materials',
-        element: <DevelopmentPage />,
+        path: '/admin',
+        children: [
+          {
+            path: '/admin/learn-materials',
+            element: <LearnMaterialsPage />,
+          },
+          {
+            path: '/admin/learn-materials/create',
+            element: <LearnMaterialsCreatePage />,
+          },
+          {
+            path: '/admin/learn-materials/:materialId',
+            element: <LearnMaterialsPreviewPage />,
+          },
+          {
+            path: '/admin/learn-materials/:materialId/edit',
+            element: <LearnMaterialsEditPage />,
+          },
+        ],
       },
     ],
   },
