@@ -1,6 +1,7 @@
 import { useSuspenseNewsDetails } from '@/entities/news';
 import { BackButton } from '@/shared/ui';
 import { NewsDetails } from '@/widgets/news-details';
+import { NewsComments } from '@/widgets/news-comments';
 import { useParams } from 'react-router-dom';
 
 const NewsPreviewPage = () => {
@@ -12,9 +13,9 @@ const NewsPreviewPage = () => {
       <div className="mb-2 flex w-full flex-row justify-between">
         <BackButton to="/admin/news" />
       </div>
-      <div className="w-full">
+      <div className="w-full flex flex-col gap-4">
         <NewsDetails details={data} />
-        {/* TODO Комментарии/Рейтинг */}
+        <NewsComments newsId={data.id} isAdminPage={true} />
       </div>
     </section>
   );

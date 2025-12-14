@@ -5,7 +5,7 @@ export const useModerationDeleteComment = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ['comment/delete'],
-    mutationFn: adminApi.deleteComment,
+    mutationFn: adminApi.deleteProjectComment,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['comments'] });
     },
