@@ -4,11 +4,11 @@ import type { RatingDTO } from '../../model/dto/ratingDTO';
 
 class NewsRatingApi {
   public async getUserRating(newsId: string): Promise<RatingDTO> {
-    return await axiosClient.get(`/api/NewsRating/card/${newsId}`);
+    return await axiosClient.get(`/api/NewsCardRating/card/${newsId}`);
   }
 
-  public async setRating(body: SetRatingDTO): Promise<{ projectId: string }> {
-    return await axiosClient.post('/api/NewsRating', body);
+  public async setRating(body: SetRatingDTO): Promise<{ cardId: string }> {
+    return await axiosClient.post('/api/NewsCardRating', body);
   }
 }
 

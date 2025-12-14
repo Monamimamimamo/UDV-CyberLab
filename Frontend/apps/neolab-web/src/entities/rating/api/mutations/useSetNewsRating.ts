@@ -6,10 +6,10 @@ export const useSetNewsRating = () => {
   return useMutation({
     mutationKey: ['news-rating/set'],
     mutationFn: newsRatingApi.setRating,
-    onSuccess: (res: { projectId: string }) => {
-      queryClient.invalidateQueries({ queryKey: ['news-rating', res.projectId] });
-      queryClient.invalidateQueries({ queryKey: ['news', res.projectId] });
+    onSuccess: (res: { cardId: string }) => {
+      console.log(res.cardId);
+      queryClient.invalidateQueries({ queryKey: ['news-rating', res.cardId] });
+      queryClient.invalidateQueries({ queryKey: ['news', res.cardId] });
     },
   });
 };
-

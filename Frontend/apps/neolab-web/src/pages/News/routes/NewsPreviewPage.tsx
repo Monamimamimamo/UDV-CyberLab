@@ -3,6 +3,8 @@ import { BackButton } from '@/shared/ui';
 import { NewsDetails } from '@/widgets/news-details';
 import { NewsComments } from '@/widgets/news-comments';
 import { NewsCommentForm } from '@/widgets/news-comment-form';
+import { NewsRatingModal } from '@/features/news-rating-modal';
+import { NewsDetailsActions } from '@/features/news-details-button';
 import { useParams } from 'react-router-dom';
 
 const NewsPreviewPage = () => {
@@ -11,8 +13,9 @@ const NewsPreviewPage = () => {
 
   return (
     <section className="mx-auto mt-6 mb-20 flex w-full flex-col items-start gap-1 sm:max-w-[712px]">
-      <div className="mb-2 flex w-full flex-row justify-between">
+      <div className="flex w-full flex-row justify-between">
         <BackButton to="/news" />
+        <NewsDetailsActions news={data} />
       </div>
       <div className="w-full flex flex-col gap-4">
         <NewsDetails details={data} />
@@ -21,6 +24,7 @@ const NewsPreviewPage = () => {
         </div>
         <NewsComments newsId={data.id} />
       </div>
+      <NewsRatingModal />
     </section>
   );
 };
