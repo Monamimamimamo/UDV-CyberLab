@@ -17,9 +17,9 @@ const NewsPreviewPage = () => {
         <BackButton to="/news" />
         <NewsDetailsActions news={data} />
       </div>
-      <div className="w-full flex flex-col gap-4">
+      <div className="flex w-full flex-col gap-4">
         <NewsDetails details={data} />
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex w-full flex-col gap-2">
           <NewsCommentForm newsId={data.id} />
         </div>
         <NewsComments newsId={data.id} />

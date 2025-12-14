@@ -11,7 +11,6 @@ export const useCreateNews = () => {
     onSuccess: () => {
       addToast({ color: 'success', title: 'Новость создана' });
       queryClient.invalidateQueries({ queryKey: ['news'] });
-      queryClient.invalidateQueries({ queryKey: ['my/news'] });
     },
   });
 };
@@ -24,9 +23,8 @@ export const useUpdateNews = () => {
     mutationFn: newsApiService.update,
     onSuccess: (id: string) => {
       addToast({ color: 'success', title: 'Новость отредактирована' });
-      queryClient.invalidateQueries({ queryKey: ['file', id] });
+      queryClient.invalidateQueries({ queryKey: ['file/news', id] });
       queryClient.refetchQueries({ queryKey: ['news', id] });
-      queryClient.invalidateQueries({ queryKey: ['files', id] });
     },
   });
 };

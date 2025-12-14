@@ -1,9 +1,17 @@
 import type { RouteObject } from 'react-router-dom';
-import { DevelopmentPage } from '../Error';
+import { LearnMaterialsPage, LearnMaterialsPreviewPage } from './routes';
 
 export const materialsRoutes: RouteObject[] = [
   {
-    path: '/education-materials',
-    element: <DevelopmentPage />,
+    children: [
+      {
+        path: '/learn-materials',
+        element: <LearnMaterialsPage />,
+      },
+      {
+        path: '/learn-materials/:materialId',
+        element: <LearnMaterialsPreviewPage />,
+      },
+    ],
   },
 ];

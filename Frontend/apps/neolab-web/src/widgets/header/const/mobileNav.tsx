@@ -1,14 +1,13 @@
 export const mobileNav = [
-  // TODO
-  // {
-  //   label: 'Учебные материалы',
-  //   links: [{ label: 'Учебные материалы', path: '/education-materials' }],
-  // },
   // {
   //   label: 'Лабораторные работы',
   //   links: [{ label: 'Лабораторные работы', path: '/labs' }],
   // },
 
+  {
+    label: 'Учебные материалы',
+    links: [{ label: 'Учебные материалы', path: '/learn-materials' }],
+  },
   {
     label: 'Тестирование',
     path: '/tests',
