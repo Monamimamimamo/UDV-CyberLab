@@ -16,8 +16,9 @@ const NewsEditPage = () => {
 
   const onEditSubmit = async (formData: NewsFormInputs) => {
     if (user?.userName && data?.id) {
-      mutateAsync({ ...formData, ownerName: user.userName, id: data?.id });
-      navigate('/admin/news');
+      return mutateAsync({ ...formData, ownerName: user.userName, id: data?.id }).then(() =>
+        navigate('/admin/news'),
+      );
     }
   };
 

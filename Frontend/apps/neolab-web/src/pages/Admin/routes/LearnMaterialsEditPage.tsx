@@ -1,8 +1,15 @@
-import { useLearnMaterialSuspenseFileSrc, useSuspenseLearnMaterialDetails, useUpdateLearnMaterials } from '@/entities/learn-materials';
+import {
+  useLearnMaterialSuspenseFileSrc,
+  useSuspenseLearnMaterialDetails,
+  useUpdateLearnMaterials,
+} from '@/entities/learn-materials';
 import { useAuth } from '@/entities/user';
 import { parseAndCreateFile } from '@/shared/common/utils/file';
 import { BackButton } from '@/shared/ui';
-import { AdminLearnMaterialsForm, type LearnMaterialFormInputs } from '@/widgets/admin-learn-materials-form';
+import {
+  AdminLearnMaterialsForm,
+  type LearnMaterialFormInputs,
+} from '@/widgets/admin-learn-materials-form';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const LearnMaterialsEditPage = () => {
@@ -16,8 +23,9 @@ const LearnMaterialsEditPage = () => {
 
   const onEditSubmit = async (formData: LearnMaterialFormInputs) => {
     if (user?.userName && data?.id) {
-      mutateAsync({ ...formData, ownerName: user.userName, id: data?.id });
-      navigate('/admin/learn-materials');
+      return mutateAsync({ ...formData, ownerName: user.userName, id: data?.id }).then(() =>
+        navigate('/admin/learn-materials'),
+      );
     }
   };
 

@@ -1,7 +1,10 @@
 import { useCreateLearnMaterials } from '@/entities/learn-materials';
 import { useAuth } from '@/entities/user';
 import { BackButton } from '@/shared/ui';
-import { AdminLearnMaterialsForm, type LearnMaterialFormInputs } from '@/widgets/admin-learn-materials-form';
+import {
+  AdminLearnMaterialsForm,
+  type LearnMaterialFormInputs,
+} from '@/widgets/admin-learn-materials-form';
 import { useNavigate } from 'react-router-dom';
 
 const LearnMaterialsCreatePage = () => {
@@ -11,7 +14,7 @@ const LearnMaterialsCreatePage = () => {
 
   const onCreateSubmit = async (formData: LearnMaterialFormInputs) => {
     if (user?.userName) {
-      mutateAsync({ ...formData, ownerName: user.userName }).then((id) =>
+      return mutateAsync({ ...formData, ownerName: user.userName }).then((id) =>
         navigate(`/admin/learn-materials/${id}/edit`),
       );
     }

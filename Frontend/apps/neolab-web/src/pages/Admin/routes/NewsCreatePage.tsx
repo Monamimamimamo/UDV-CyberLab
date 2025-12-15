@@ -11,7 +11,7 @@ const NewsCreatePage = () => {
 
   const onCreateSubmit = async (formData: NewsFormInputs) => {
     if (user?.userName) {
-      mutateAsync({ ...formData, ownerName: user.userName }).then((id) =>
+      return mutateAsync({ ...formData, ownerName: user.userName }).then((id) =>
         navigate(`/admin/news/${id}/edit`),
       );
     }

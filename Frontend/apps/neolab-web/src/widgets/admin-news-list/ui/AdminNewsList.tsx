@@ -96,7 +96,7 @@ export const AdminNewsList = ({ news }: NewsListProps) => {
 
   return (
     <>
-      <ul className={clsx('grid gap-5 sm:grid-cols-2 md:grid-cols-3')}>
+      <ul className={clsx('grid gap-5 sm:grid-cols-2')}>
         {news.map((item) => (
           <li key={item.id}>
             <NewsCard

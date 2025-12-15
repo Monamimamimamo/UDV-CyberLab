@@ -38,7 +38,7 @@ export const NewsCard = ({ newsItem, onClick, actionSlot }: ProjectCardProps) =>
           isLoading={isLoading || !imgSrc}
           src={imgSrc || newsItem.logoPath}
           alt={newsItem.name}
-          className="pointer-events-none h-full w-full overflow-hidden rounded-b-none object-cover object-center shadow-none"
+          className="pointer-events-none h-[220px] w-full overflow-hidden rounded-b-none object-cover object-center shadow-none"
           classNames={{
             wrapper: '!max-w-full shadow-none !h-full',
           }}

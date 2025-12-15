@@ -56,7 +56,6 @@ export const AdminLearnMaterialsForm = ({
 
   const {
     handleSubmit,
-    reset,
     control,
     watch,
     setValue,
@@ -76,12 +75,8 @@ export const AdminLearnMaterialsForm = ({
     trigger(type);
   };
 
-  const onReset = () => {
-    reset();
-  };
-
   const onSubmitHandler: SubmitHandler<LearnMaterialFormInputs> = (formData) => {
-    onSubmit(formData).then(onReset);
+    onSubmit(formData);
   };
 
   const isNameError = errors.name !== undefined;
@@ -184,7 +179,7 @@ export const AdminLearnMaterialsForm = ({
             defaultValue=""
             render={({ field }) => (
               <Select
-                color="white"
+                color="gray"
                 aria-label="Выберите тип публикации"
                 size="lg"
                 listboxProps={selectClassNames}

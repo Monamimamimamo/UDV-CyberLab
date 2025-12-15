@@ -99,7 +99,7 @@ export const AdminLearnMaterialsList = ({ learnMaterials }: LearnMaterialsListPr
 
   return (
     <>
-      <ul className={clsx('grid gap-5 sm:grid-cols-2 md:grid-cols-3')}>
+      <ul className={clsx('grid gap-5 sm:grid-cols-2')}>
         {learnMaterials.map((item) => (
           <li key={item.id}>
             <LearnMaterialCard
