@@ -5,4 +5,5 @@ export interface LearnMaterialDetailsDto {
   name: string;
   shortDescription: string;
   logoPath: string;
+  publicationType: string;
 }

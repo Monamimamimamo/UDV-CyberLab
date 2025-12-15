@@ -1,15 +1,15 @@
 import { useDeleteLearnMaterials } from '@/entities/admin';
+import { LearnMaterialCard } from '@/entities/learn-materials';
 import type { LearnMaterialCardDto } from '@/entities/learn-materials/dtos/learn-material-card.dto';
 import { UserActionButton } from '@/features/user-actions/ui/UserActionButton';
+import { Button } from '@/shared/ui';
 import { EmptyLearnMaterialsList } from '@/widgets/learn-materials-list';
+import { Popover, PopoverContent, PopoverTrigger } from '@heroui/react';
+import clsx from 'clsx';
 import { useState } from 'react';
+import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-import { Popover, PopoverTrigger, PopoverContent } from '@heroui/react';
-import { Button } from '@/shared/ui';
-import { HiOutlineDotsVertical } from 'react-icons/hi';
-import { LearnMaterialCard } from '@/entities/learn-materials';
-import clsx from 'clsx';
 
 type LearnMaterialActionsProps = {
   learnMaterial: LearnMaterialCardDto;
@@ -94,7 +94,7 @@ export const AdminLearnMaterialsList = ({ learnMaterials }: LearnMaterialsListPr
   }
 
   const handleNavigate = (id: string) => {
-    navigate(`/admin/news/${id}`);
+    navigate(`/admin/learn-materials/${id}`);
   };
 
   return (

@@ -15,5 +15,9 @@ export const useNewsList = ({ sortOrder = 0, search }: GetAllNewsParams) => {
 };
 
 export const useNewsFileSrc = (path: string, id: string) => {
+  return useQuery(getNewsFile(path, id));
+};
+
+export const useNewsSuspenseFileSrc = (path: string, id: string) => {
   return useSuspenseQuery(getNewsFile(path, id));
 };

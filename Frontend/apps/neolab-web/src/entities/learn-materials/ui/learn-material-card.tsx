@@ -49,18 +49,20 @@ export const LearnMaterialCard = ({
       onKeyDown={handleKeyPress}
       className="drop-shadow-base custom-outline relative flex h-[382px] w-full cursor-pointer flex-col overflow-hidden rounded-[12px] p-0 transition-colors hover:bg-white/80"
     >
-      <Image
-        shadow="sm"
-        radius="md"
-        isBlurred={true}
-        isLoading={isLoading || !imgSrc}
-        src={imgSrc || learnMaterial.logoPath}
-        alt={learnMaterial.name}
-        className="pointer-events-none h-[220px] w-full overflow-hidden rounded-b-none object-cover object-center shadow-none"
-        classNames={{
-          wrapper: '!max-w-full shadow-none',
-        }}
-      />
+      <div className="h-[220px]">
+        <Image
+          shadow="sm"
+          radius="md"
+          isBlurred={true}
+          isLoading={isLoading || !imgSrc}
+          src={imgSrc || learnMaterial.logoPath}
+          alt={learnMaterial.name}
+          className="pointer-events-none h-full w-full overflow-hidden rounded-b-none object-cover object-center shadow-none"
+          classNames={{
+            wrapper: '!max-w-full shadow-none !h-full',
+          }}
+        />
+      </div>
       <div className="flex h-full flex-col gap-[10px] px-4 py-4">
         <div>
           <p className="line-clamp-2 text-sm font-medium">{learnMaterial.name}</p>

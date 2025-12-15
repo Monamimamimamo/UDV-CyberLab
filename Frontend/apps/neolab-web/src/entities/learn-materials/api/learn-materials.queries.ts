@@ -19,5 +19,5 @@ export const useLearnMaterialList = ({ sortOrder = 0, search }: GetAllLearnMater
 };
 
 export const useLearnMaterialFileSrc = (path: string, id: string) => {
-  return useSuspenseQuery(getLearnMaterialFile(path, id));
+  return useQuery(getLearnMaterialFile(path, id));
 };
