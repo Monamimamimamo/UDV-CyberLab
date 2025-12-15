@@ -46,7 +46,7 @@ export const LearnMaterialCommentForm = ({ materialId }: { materialId: string })
           defaultValue=""
           render={({ field }) => (
             <Textarea
-              label="Добавить комментарий к учебному материалу"
+              label="Добавить комментарий к материалу"
               minRows={2}
               maxRows={8}
               radius="sm"

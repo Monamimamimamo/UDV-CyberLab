@@ -48,7 +48,7 @@ export const NewsCard = ({ newsItem, onClick, actionSlot }: ProjectCardProps) =>
       <div className="flex h-full flex-col gap-[10px] px-4 py-4">
         <div>
           <p className="line-clamp-2 text-sm font-medium">{newsItem.name}</p>
-          <p className="mt-1 line-clamp-3 text-xs">{newsItem.shortDescription}</p>
+          <p className="mt-1 line-clamp-5 text-xs">{newsItem.shortDescription}</p>
         </div>
         <div className="mt-auto flex flex-col">
           <div className="flex items-center justify-between">
