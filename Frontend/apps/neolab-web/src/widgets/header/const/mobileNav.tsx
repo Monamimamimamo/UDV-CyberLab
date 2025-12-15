@@ -5,10 +5,6 @@ export const mobileNav = [
   // },
 
   {
-    label: 'Учебные материалы',
-    links: [{ label: 'Учебные материалы', path: '/learn-materials' }],
-  },
-  {
     label: 'Тестирование',
     path: '/tests',
     links: [
@@ -26,6 +22,10 @@ export const mobileNav = [
   {
     label: 'Новости',
     links: [{ label: 'Все новости', path: '/news' }],
+  },
+  {
+    label: 'Учебные материалы',
+    links: [{ label: 'Учебные материалы', path: '/learn-materials' }],
   },
   {
     adminOnly: true,
