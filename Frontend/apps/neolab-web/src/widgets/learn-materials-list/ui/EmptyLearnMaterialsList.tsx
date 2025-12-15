@@ -18,7 +18,7 @@ export const EmptyLearnMaterialsList = () => {
         <p className="text-foreground font-w3ip bg-main-gradient bg-clip-text text-3xl text-transparent">
           404
         </p>
-        <p className="text-second mb-3">Новости не найдены</p>
+        <p className="text-second mb-3">Учебные материалы не найдены</p>
         {isAdmin && (
           <Button
             startContent={<MdAdd size={22} />}
