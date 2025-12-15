@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addToast } from '@heroui/react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { learnMaterialsApiService } from './learn-materials-api.service';
 
 export const useCreateLearnMaterials = () => {
@@ -15,7 +15,7 @@ export const useCreateLearnMaterials = () => {
   });
 };
 
-export const useUpdateNews = () => {
+export const useUpdateLearnMaterials = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -23,7 +23,7 @@ export const useUpdateNews = () => {
     mutationFn: learnMaterialsApiService.update,
     onSuccess: (id: string) => {
       addToast({ color: 'success', title: 'Учебный материал отредактирован' });
-      queryClient.invalidateQueries({ queryKey: ['file/learn-material', id] });
+      queryClient.invalidateQueries({ queryKey: ['file/learn-materials', id] });
       queryClient.refetchQueries({ queryKey: ['learn-materials', id] });
     },
   });
