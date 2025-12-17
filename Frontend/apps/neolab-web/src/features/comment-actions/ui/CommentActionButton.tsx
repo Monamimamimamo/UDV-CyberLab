@@ -8,8 +8,8 @@ export const CommentActionButton = (props: ButtonProps) => {
       variant="light"
       size="md"
       radius="sm"
-      className={`justify-start ${props.className}`}
       {...props}
+      className={`flex justify-start ${props.className}`}
     />
   );
 };

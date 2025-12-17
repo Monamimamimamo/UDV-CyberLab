@@ -16,6 +16,9 @@ export const useLogin = () => {
   const { mutateAsync, isPending } = useMutation({
     mutationKey: ['auth/login'],
     mutationFn: authApi.login,
+    meta: {
+      skipGlobalError: true,
+    },
     onError: (error: ErrorResponse) => {
       if (error.status === 401) {
         setFetchError({

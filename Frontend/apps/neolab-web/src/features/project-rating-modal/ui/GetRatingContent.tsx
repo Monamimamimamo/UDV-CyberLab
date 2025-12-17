@@ -4,7 +4,7 @@ import { Rating } from '@/shared/ui';
 export const GetRatingContent = ({ data }: { data: RatingDTO }) => {
   return (
     <div className="flex items-center flex-col gap-2 w-full">
-      <p className="text-2xl w-fit">Вы уже оценивали проект!</p>
+      <p className="text-2xl w-fit text-center">Вы уже оценивали проект!</p>
       <div className="w-fit">
         <Rating starSize={50} rating={data.userRating!} />
       </div>

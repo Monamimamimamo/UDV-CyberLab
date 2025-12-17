@@ -1,6 +1,6 @@
-import { resetPasswordSchema } from '@/entities/user';
-import { Button, Input } from '@/shared/ui';
-import { Link } from 'react-router-dom';
+import { resetPasswordSchema, useForgotPassword } from '@/entities/user';
+import { Button, Input, Spinner } from '@/shared/ui';
+import { Link, useNavigate } from 'react-router-dom';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -8,7 +8,8 @@ import { z } from 'zod';
 type ResetPasswordType = z.infer<typeof resetPasswordSchema>;
 
 export const ResetPasswordForm = () => {
-  // const { login, isPending, error } = useLogin();
+  const navigate = useNavigate();
+  const { forgotPassword, isPending, error } = useForgotPassword();
 
   const {
     handleSubmit,
@@ -24,14 +25,14 @@ export const ResetPasswordForm = () => {
   };
 
   const onSubmit: SubmitHandler<ResetPasswordType> = (data) => {
-    console.log(data);
-    onReset();
-
-    // login({ ...data, role: Number(userRole) }).finally(onReset);
+    forgotPassword({ email: data.email })
+      .then(() => {
+        navigate('/reset-password/success');
+      })
+      .finally(onReset);
   };
 
-  const isEmailError = errors.email !== undefined;
-  // TODO  || Boolean(error)
+  const isEmailError = errors.email !== undefined || Boolean(error);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
@@ -42,7 +43,7 @@ export const ResetPasswordForm = () => {
         render={({ field }) => (
           <Input
             isInvalid={isEmailError}
-            errorMessage={errors.email?.message}
+            errorMessage={errors.email?.message || error?.message}
             {...field}
             label="E-mail"
             placeholder="Введите адрес электронной почты"
@@ -54,10 +55,10 @@ export const ResetPasswordForm = () => {
 
       <Button
         color="gradient"
-        // startContent={isPending ? <Spinner size="sm" color="white" /> : null}
+        startContent={isPending ? <Spinner size="sm" color="white" /> : null}
         type="submit"
         fullWidth
-        // isDisabled={isPending}
+        isDisabled={isPending}
       >
         Отправить
       </Button>

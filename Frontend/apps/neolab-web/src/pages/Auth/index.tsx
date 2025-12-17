@@ -5,6 +5,7 @@ import {
   NewPasswordPage,
   NewPasswordSuccessPage,
   RegistrationPage,
+  RegistrationSuccessPage,
   ResetPasswordPage,
   ResetPasswordSuccessPage,
   VerifyPage,
@@ -20,7 +21,16 @@ export const authRoutes: RouteObject[] = [
       },
       {
         path: '/registration',
-        element: <RegistrationPage />,
+        children: [
+          {
+            path: '',
+            element: <RegistrationPage />,
+          },
+          {
+            path: 'success',
+            element: <RegistrationSuccessPage />,
+          },
+        ],
       },
       {
         path: '/reset-password',

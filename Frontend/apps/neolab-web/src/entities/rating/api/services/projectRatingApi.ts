@@ -7,7 +7,7 @@ class ProjectRatingApi {
     return await axiosClient.get(`/api/ProjectCardRating/card/${projectId}`);
   }
 
-  public async setRating(body: SetRatingDTO): Promise<{ projectId: string }> {
+  public async setRating(body: SetRatingDTO): Promise<{ cardId: string }> {
     return await axiosClient.post('/api/ProjectCardRating', body);
   }
 }

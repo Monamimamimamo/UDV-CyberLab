@@ -1,5 +1,5 @@
 export interface CreateCommentDTO {
-  projectId: string;
+  cardId: string;
   userName: string;
   text: string;
 }

@@ -30,22 +30,25 @@ export const NewsCard = ({ newsItem, onClick, actionSlot }: ProjectCardProps) =>
       onKeyDown={handleKeyPress}
       className="drop-shadow-base custom-outline relative flex h-[382px] w-full cursor-pointer flex-col overflow-hidden rounded-[12px] p-0 transition-colors hover:bg-white/80"
     >
-      <Image
-        shadow="sm"
-        radius="md"
-        isBlurred={true}
-        isLoading={isLoading || !imgSrc}
-        src={imgSrc || newsItem.logoPath}
-        alt={newsItem.name}
-        className="pointer-events-none h-[220px] w-full overflow-hidden rounded-b-none object-cover object-center shadow-none"
-        classNames={{
-          wrapper: '!max-w-full shadow-none',
-        }}
-      />
+      <div className="h-[220px]">
+        <Image
+          shadow="sm"
+          radius="md"
+          isBlurred={true}
+          isLoading={isLoading || !imgSrc}
+          src={imgSrc || newsItem.logoPath}
+          alt={newsItem.name}
+          className="pointer-events-none h-[220px] w-full overflow-hidden rounded-b-none object-cover object-center shadow-none"
+          classNames={{
+            wrapper: '!max-w-full shadow-none !h-full',
+          }}
+        />
+      </div>
+
       <div className="flex h-full flex-col gap-[10px] px-4 py-4">
         <div>
           <p className="line-clamp-2 text-sm font-medium">{newsItem.name}</p>
-          <p className="mt-1 line-clamp-3 text-xs">{newsItem.shortDescription}</p>
+          <p className="mt-1 line-clamp-5 text-xs">{newsItem.shortDescription}</p>
         </div>
         <div className="mt-auto flex flex-col">
           <div className="flex items-center justify-between">

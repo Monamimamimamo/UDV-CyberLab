@@ -1,4 +1,4 @@
-import { useCreateComment } from '@/entities/comment';
+import { useCreateProjectComment } from '@/entities/comment';
 import { useUser } from '@/entities/user';
 import { Button, Card, Textarea } from '@/shared/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,7 +14,7 @@ type CommentInput = z.infer<typeof commentSchema>;
 
 export const ProjectCommentForm = ({ projectId }: { projectId: string }) => {
   const user = useUser();
-  const { mutateAsync: createComment, isPending } = useCreateComment();
+  const { mutateAsync: createComment, isPending } = useCreateProjectComment();
 
   const {
     handleSubmit,
@@ -31,20 +31,15 @@ export const ProjectCommentForm = ({ projectId }: { projectId: string }) => {
     });
   };
 
-  const onSubmit: SubmitHandler<CommentInput> = data => {
+  const onSubmit: SubmitHandler<CommentInput> = (data) => {
     if (user?.userName) {
-      createComment({ ...data, projectId, userName: user?.userName }).finally(
-        onReset
-      );
+      createComment({ ...data, cardId: projectId, userName: user?.userName }).finally(onReset);
     }
   };
 
   return (
-    <Card className="drop-shadow-base w-full rounded-xl custom-outline pt-[10px] pb-[20px] px-[15px] flex flex-row gap-4 min-h-[80px]">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-full flex flex-row gap-1"
-      >
+    <Card className="drop-shadow-base custom-outline flex min-h-[80px] w-full flex-row gap-4 rounded-xl px-[15px] pt-[10px] pb-[20px]">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-row gap-1">
         <Controller
           name="text"
           control={control}

@@ -11,8 +11,11 @@ export const useRegister = () => {
   const { mutateAsync, isPending } = useMutation({
     mutationKey: ['auth/register'],
     mutationFn: authApi.register,
+    meta: {
+      skipGlobalError: true,
+    },
     onSuccess: () => {
-      navigate('/login');
+      navigate('/registration/success');
     },
     onError: (error: ErrorResponse) => {
       if (error.status === 400) {

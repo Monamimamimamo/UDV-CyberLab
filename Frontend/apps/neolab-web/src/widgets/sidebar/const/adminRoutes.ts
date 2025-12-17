@@ -37,8 +37,8 @@ export const adminRoutes: SidebarItemType[] = [
   {
     id: 5,
     label: 'Учебные материалы',
-    path: '/admin/education-materials',
+    path: '/admin/learn-materials',
     icon: IoBookOutline,
-    enabledList: ['/admin/education-materials'],
+    enabledList: ['/admin/learn-materials'],
   },
 ];

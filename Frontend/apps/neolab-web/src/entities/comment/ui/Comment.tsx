@@ -15,18 +15,18 @@ export const Comment = ({ comment, actionSlot }: CommentType) => {
   const isExpanded = comment.text.length > 250;
 
   return (
-    <Card className="drop-shadow-base max-w-full w-full rounded-lg custom-outline pt-[10px] pb-[20px] px-[15px] flex flex-row gap-4 min-h-[80px]">
+    <Card className="drop-shadow-base custom-outline flex min-h-[80px] w-full max-w-full flex-row gap-4 rounded-lg px-[15px] pt-[10px] pb-[20px]">
       <div className="flex-shrink-0">
         <UserImage username={comment.authorName} />
       </div>
-      <div className="flex-1 min-w-0">
+      <div className="min-w-0 flex-1">
         <CommentDetails comment={comment} />
-        <div className="w-full flex flex-row gap-2 justify-between">
-          <div className="w-full flex-1 min-w-0">
+        <div className="flex w-full flex-row justify-between gap-2">
+          <div className="w-full min-w-0 flex-1">
             <span
               className={clsx(
                 'text-sm break-words',
-                isFullView ? 'line-clamp-none' : 'line-clamp-3'
+                isFullView ? 'line-clamp-none' : 'line-clamp-3',
               )}
             >
               {comment.text}
@@ -34,7 +34,7 @@ export const Comment = ({ comment, actionSlot }: CommentType) => {
             {isExpanded && !isFullView && (
               <span
                 onClick={() => setIsFullView(true)}
-                className="text-foreground/80 hover:underline text-sm font-semibold cursor-pointer"
+                className="text-foreground/80 cursor-pointer text-sm font-semibold hover:underline"
               >
                 развернуть
               </span>

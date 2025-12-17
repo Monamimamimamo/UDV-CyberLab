@@ -1,4 +1,4 @@
-import { useNewsFileSrc, useSuspenseNewsDetails, useUpdateNews } from '@/entities/news';
+import { useNewsSuspenseFileSrc, useSuspenseNewsDetails, useUpdateNews } from '@/entities/news';
 import { useAuth } from '@/entities/user';
 import { parseAndCreateFile } from '@/shared/common/utils/file';
 import { BackButton } from '@/shared/ui';
@@ -12,12 +12,13 @@ const NewsEditPage = () => {
   const user = useAuth((state) => state.user);
   const { mutateAsync, isPending } = useUpdateNews();
   const { data } = useSuspenseNewsDetails(newsId);
-  const { data: imgSrc } = useNewsFileSrc(data.logoPath, data.id);
+  const { data: imgSrc } = useNewsSuspenseFileSrc(data.logoPath, data.id);
 
   const onEditSubmit = async (formData: NewsFormInputs) => {
     if (user?.userName && data?.id) {
-      mutateAsync({ ...formData, ownerName: user.userName, id: data?.id });
-      navigate('/admin/news');
+      return mutateAsync({ ...formData, ownerName: user.userName, id: data?.id }).then(() =>
+        navigate('/admin/news'),
+      );
     }
   };
 

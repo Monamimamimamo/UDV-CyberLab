@@ -9,7 +9,7 @@ export const CreateTestButton = () => {
   const { scrollNavigate } = useNavigation();
 
   const handleCreate = () => {
-    mutateAsync().then(response => {
+    mutateAsync().then((response) => {
       scrollNavigate(`/tests/manage/${response}/edit`);
     });
   };
@@ -21,9 +21,7 @@ export const CreateTestButton = () => {
       color="gradient"
       onPress={handleCreate}
       size={isMobile ? 'lg' : 'md'}
-      endContent={
-        isPending ? <Spinner size="sm" color="white" /> : <MdAdd size={22} />
-      }
+      endContent={isPending ? <Spinner size="sm" color="primary" /> : <MdAdd size={22} />}
     >
       Создать тест
     </Button>

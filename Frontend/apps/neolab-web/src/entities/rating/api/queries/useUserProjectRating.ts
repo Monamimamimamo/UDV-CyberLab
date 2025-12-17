@@ -3,7 +3,7 @@ import { projectRatingApi } from '../services/projectRatingApi';
 
 export const useUserProjectRating = (projectId: string) => {
   return useQuery({
-    queryKey: ['rating', projectId],
+    queryKey: ['projects-rating', projectId],
     queryFn: async () => await projectRatingApi.getUserRating(projectId),
     staleTime: 60 * 1000,
   });

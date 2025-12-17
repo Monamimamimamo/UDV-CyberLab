@@ -1,9 +1,4 @@
 export const mobileNav = [
-  // TODO
-  // {
-  //   label: 'Учебные материалы',
-  //   links: [{ label: 'Учебные материалы', path: '/education-materials' }],
-  // },
   // {
   //   label: 'Лабораторные работы',
   //   links: [{ label: 'Лабораторные работы', path: '/labs' }],
@@ -29,6 +24,10 @@ export const mobileNav = [
     links: [{ label: 'Все новости', path: '/news' }],
   },
   {
+    label: 'Учебные материалы',
+    links: [{ label: 'Учебные материалы', path: '/learn-materials' }],
+  },
+  {
     adminOnly: true,
     label: 'Администрирование',
     path: '/admin',
@@ -37,7 +36,7 @@ export const mobileNav = [
       { label: 'Витрина проектов', path: '/admin/projects' },
       { label: 'Тесты', path: '/admin/tests' },
       { label: 'Новости', path: '/admin/news' },
-      { label: 'Учебные материалы', path: '/admin/education-materials' },
+      { label: 'Учебные материалы', path: '/admin/learn-materials' },
     ],
   },
 ];

@@ -5,25 +5,22 @@ import type { UpdateCommentDTO } from '../../model/dto/UpdateCommentDTO';
 
 type CommentResponse = { cardId: string };
 
-class CommentApi {
-  public async getByProjectId(projectId: string): Promise<CommentDTO[]> {
-    return await axiosClient.get(`/api/ProjectComment/${projectId}`);
+class LearnMaterialsCommentApi {
+  public async getByMaterialId(materialId: string): Promise<CommentDTO[]> {
+    return await axiosClient.get(`/api/LearnMaterialsComment/${materialId}`);
   }
 
   public async create(body: CreateCommentDTO): Promise<CommentResponse> {
-    return await axiosClient.post('/api/ProjectComment', {
-      ...body,
-      cardId: body.projectId,
-    });
+    return await axiosClient.post('/api/LearnMaterialsComment', body);
   }
 
   public async update(body: UpdateCommentDTO): Promise<CommentResponse> {
-    return await axiosClient.put('/api/ProjectComment', body);
+    return await axiosClient.put('/api/LearnMaterialsComment', body);
   }
 
   public async delete(id: string): Promise<boolean> {
-    return await axiosClient.delete(`/api/ProjectComment/${id}`);
+    return await axiosClient.delete(`/api/LearnMaterialsComment/${id}`);
   }
 }
 
-export const commentApi = new CommentApi();
+export const learnMaterialsCommentApi = new LearnMaterialsCommentApi();

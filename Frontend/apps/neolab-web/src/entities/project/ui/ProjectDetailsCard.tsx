@@ -28,19 +28,17 @@ export const ProjectDetailsCard = ({ project }: { project: ProjectDTO }) => {
   return (
     <Card className="drop-shadow-base custom-outline w-full max-w-[712px] rounded-[12px] px-[30px] py-[30px]">
       <div className="flex h-full flex-col gap-7 sm:flex-row">
-        <div className="sm:h-[160px] sm:w-[160px]">
-          <Image
-            shadow="sm"
-            radius="md"
-            isBlurred={true}
-            src={logo}
-            alt={project.name}
-            className="h-full w-full overflow-hidden object-cover object-center sm:h-[160px] sm:w-[160px]"
-            classNames={{
-              wrapper: 'w-full h-full sm:h-[160px] sm:w-[160px]',
-            }}
-          />
-        </div>
+        <Image
+          shadow="sm"
+          radius="md"
+          isBlurred={true}
+          src={logo}
+          alt={project.name}
+          className="h-full w-full overflow-hidden object-cover object-center sm:h-[160px] sm:w-[160px]"
+          classNames={{
+            wrapper: 'w-full h-full !sm:h-[160px] !sm:w-[160px]',
+          }}
+        />
 
         <div className="flex w-full flex-col">
           <h2 className="mb-4 text-2xl font-medium break-words">{project.name}</h2>

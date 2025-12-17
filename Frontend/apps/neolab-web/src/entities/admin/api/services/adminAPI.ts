@@ -4,7 +4,7 @@ import type { UserInfo } from '@/shared/types';
 type GetUsersParams = { search?: string };
 
 class AdminApi {
-  public async deleteComment(commentId: string): Promise<boolean> {
+  public async deleteProjectComment(commentId: string): Promise<boolean> {
     return await axiosClient.delete(`/api/Admin/comment/${commentId}`);
   }
 
@@ -26,6 +26,10 @@ class AdminApi {
 
   public async deleteNews(newsId: string) {
     return await axiosClient.delete(`/api/NewsCard?id=${newsId}`);
+  }
+
+  public async deleteLearnMaterials(materialId: string) {
+    return await axiosClient.delete(`/api/LearnMaterialsCard?id=${materialId}`);
   }
 }
 
