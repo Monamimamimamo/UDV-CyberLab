@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { useDeleteUserModal } from '../model/store';
 import { Button, Input } from '@/shared/ui';
-import { useDeleteUser } from '@/entities/admin';
+import { useAdminDeleteUser } from '@/entities/admin';
 import { UserCard } from '@/entities/user';
 
 const createDeleteUserSchema = (ownerName: string) =>
@@ -14,7 +14,7 @@ const createDeleteUserSchema = (ownerName: string) =>
       .string()
       .trim()
       .min(1, 'Подтвердите почту пользователя')
-      .refine(value => value === ownerName, {
+      .refine((value) => value === ownerName, {
         message: 'Почта пользователя не совпадает',
       }),
   });
@@ -22,7 +22,7 @@ const createDeleteUserSchema = (ownerName: string) =>
 type DeleteUserInput = z.infer<ReturnType<typeof createDeleteUserSchema>>;
 
 export const UserDeleteForm = () => {
-  const { mutateAsync, isPending } = useDeleteUser();
+  const { deleteUser, isPending } = useAdminDeleteUser();
   const { options, setOpen } = useDeleteUserModal();
 
   const {
@@ -43,9 +43,9 @@ export const UserDeleteForm = () => {
 
   const onSubmit = () => {
     if (options?.userId) {
-      mutateAsync(options?.userId)
+      deleteUser(options?.userId)
         .then(handleReturn)
-        .catch(error => setError('username', error));
+        .catch((error) => setError('username', error));
     }
   };
 
@@ -55,8 +55,8 @@ export const UserDeleteForm = () => {
   };
 
   return (
-    <ModalBody className="py-5 px-10">
-      <p className="text-[20px] mb-2 mx-5 text-center">
+    <ModalBody className="px-10 py-5">
+      <p className="mx-5 mb-2 text-center text-[20px]">
         Вы действительно хотите удалить пользователя?
       </p>
       {options && <UserCard user={options} orientation="vertical" />}
@@ -81,18 +81,18 @@ export const UserDeleteForm = () => {
           )}
         />
 
-        <div className="mt-4 flex flex-row gap-4 items-center justify-center">
+        <div className="mt-4 flex flex-row items-center justify-center gap-4">
           <Button
             type="submit"
             color="danger"
             size="md"
             radius="sm"
-            className="w-1/2 text-white bg-red-500"
+            className="w-1/2 bg-red-500 text-white"
             isLoading={isPending}
           >
             Удалить
           </Button>
-          <Divider orientation="vertical" className="h-12 bg-foreground/30" />
+          <Divider orientation="vertical" className="bg-foreground/30 h-12" />
 
           <Button
             type="button"

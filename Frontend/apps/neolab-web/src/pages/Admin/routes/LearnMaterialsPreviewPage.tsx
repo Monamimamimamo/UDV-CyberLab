@@ -1,6 +1,6 @@
 import { useSuspenseLearnMaterialDetails } from '@/entities/learn-materials';
 import { BackButton } from '@/shared/ui';
-import { LearnMaterialComments } from '@/widgets/learn-material-comments';
+import { Comments } from '@/widgets/comments';
 import { LearnMaterialDetails } from '@/widgets/learn-materials-details';
 import { useParams } from 'react-router-dom';
 
@@ -13,9 +13,9 @@ const LearnMaterialsPreviewPage = () => {
       <div className="flex w-full flex-row justify-between">
         <BackButton to="/admin/learn-materials" />
       </div>
-      <div className="w-full flex flex-col gap-4">
+      <div className="flex w-full flex-col gap-4">
         <LearnMaterialDetails details={data} />
-        <LearnMaterialComments materialId={data.id} isAdminPage={true} />
+        <Comments entityId={data.id} entityKey="learn-materials" isAdminPage />
       </div>
     </section>
   );

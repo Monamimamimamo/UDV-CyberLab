@@ -1,8 +1,8 @@
-import { useUserList } from '@/entities/admin';
+import { useSuspenseUsers } from '@/entities/admin';
 import { AdminUserList } from './AdminUserList';
 
 export const AdminUserListWithQuery = ({ search }: { search?: string }) => {
-  const { data } = useUserList({ search });
+  const users = useSuspenseUsers({ search });
 
-  return <AdminUserList users={data} />;
+  return <AdminUserList users={users} />;
 };

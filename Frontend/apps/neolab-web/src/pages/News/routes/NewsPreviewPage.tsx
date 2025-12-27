@@ -1,11 +1,11 @@
 import { useSuspenseNewsDetails } from '@/entities/news';
 import { BackButton } from '@/shared/ui';
 import { NewsDetails } from '@/widgets/news-details';
-import { NewsComments } from '@/widgets/news-comments';
-import { NewsCommentForm } from '@/widgets/news-comment-form';
 import { NewsRatingModal } from '@/features/news-rating-modal';
 import { NewsDetailsActions } from '@/features/news-details-button';
 import { useParams } from 'react-router-dom';
+import { Comments } from '@/widgets/comments';
+import { CommentForm } from '@/features/comment-form';
 
 const NewsPreviewPage = () => {
   const { newsId = '' } = useParams();
@@ -20,9 +20,9 @@ const NewsPreviewPage = () => {
       <div className="flex w-full flex-col gap-4">
         <NewsDetails details={data} />
         <div className="flex w-full flex-col gap-2">
-          <NewsCommentForm newsId={data.id} />
+          <CommentForm entityId={data.id} entityKey="news" />
         </div>
-        <NewsComments newsId={data.id} />
+        <Comments entityId={data.id} entityKey="news" />
       </div>
       <NewsRatingModal />
     </section>

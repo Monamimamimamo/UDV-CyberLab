@@ -1,30 +1,27 @@
 import { useParams } from 'react-router-dom';
-import {
-  ProjectDetailsCard,
-  useSuspenseProjectDetails,
-} from '@/entities/project';
+import { ProjectDetailsCard, useSuspenseProjectDetails } from '@/entities/project';
 import { BackButton } from '@/shared/ui';
 import { ProjectDetailsActions } from '@/features/project-details-button';
-import { ProjectComments } from '@/widgets/project-comments';
-import { ProjectCommentForm } from '@/widgets/project-comment-form';
 import { ProjectRatingModal } from '@/features/project-rating-modal';
+import { Comments } from '@/widgets/comments';
+import { CommentForm } from '@/features/comment-form';
 
 const ProjectPreviewPage = () => {
   const { projectId = '' } = useParams();
   const { data } = useSuspenseProjectDetails(projectId);
 
   return (
-    <section className="w-full sm:max-w-[712px] flex flex-col gap-1 items-start mb-20">
-      <div className="flex flex-row justify-between w-full">
+    <section className="mb-20 flex w-full flex-col items-start gap-1 sm:max-w-[712px]">
+      <div className="flex w-full flex-row justify-between">
         <BackButton />
         <ProjectDetailsActions project={data} />
       </div>
-      <div className="flex flex-col gap-4 w-full">
-        <div className="flex flex-col gap-2 w-full">
+      <div className="flex w-full flex-col gap-4">
+        <div className="flex w-full flex-col gap-2">
           <ProjectDetailsCard project={data} />
-          <ProjectCommentForm projectId={data.id} />
+          <CommentForm entityId={data.id} entityKey="projects" />
         </div>
-        <ProjectComments projectId={data.id} />
+        <Comments entityId={data.id} entityKey="projects" />
       </div>
       <ProjectRatingModal />
     </section>

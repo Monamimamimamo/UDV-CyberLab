@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { useDeleteProjectModal } from '../model/store';
 import { Button, Input } from '@/shared/ui';
-import { useModerationDeleteProject } from '@/entities/admin';
+import { useAdminDeleteProject } from '@/entities/admin';
 
 const createDeleteProjectSchema = (ownerName: string) =>
   z.object({
@@ -21,7 +21,7 @@ const createDeleteProjectSchema = (ownerName: string) =>
 type DeleteProjectInput = z.infer<ReturnType<typeof createDeleteProjectSchema>>;
 
 export const ProjectDeleteForm = () => {
-  const { mutateAsync, isPending } = useModerationDeleteProject();
+  const { deleteProject, isPending } = useAdminDeleteProject();
   const { options, setOpen } = useDeleteProjectModal();
 
   const {
@@ -42,7 +42,7 @@ export const ProjectDeleteForm = () => {
 
   const onSubmit = () => {
     if (options?.projectId) {
-      mutateAsync(options?.projectId)
+      deleteProject(options?.projectId)
         .then(handleReturn)
         .catch(error => setError('username', error));
     }

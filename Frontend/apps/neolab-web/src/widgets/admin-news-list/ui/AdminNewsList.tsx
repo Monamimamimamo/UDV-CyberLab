@@ -9,7 +9,7 @@ import { Popover, PopoverTrigger, PopoverContent } from '@heroui/react';
 import { useState } from 'react';
 import { Button } from '@/shared/ui';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
-import { useDeleteNews } from '@/entities/admin';
+import { useAdminDeleteNews } from '@/entities/admin';
 
 type CommentActionsProps = {
   newsItem: NewsCardDto;
@@ -17,11 +17,11 @@ type CommentActionsProps = {
 };
 
 export const NewsActions = ({ newsItem, closePopover }: CommentActionsProps) => {
-  const { mutateAsync, isPending } = useDeleteNews();
+  const { deleteNews, isPending } = useAdminDeleteNews();
   const navigate = useNavigate();
 
   const handleUserDelete = () => {
-    mutateAsync(newsItem.id).then(() => {
+    deleteNews(newsItem.id).then(() => {
       closePopover();
     });
   };

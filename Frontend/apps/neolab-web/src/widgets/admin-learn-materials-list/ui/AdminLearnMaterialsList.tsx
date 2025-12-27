@@ -1,4 +1,4 @@
-import { useDeleteLearnMaterials } from '@/entities/admin';
+import { useAdminDeleteLearnMaterials } from '@/entities/admin';
 import { LearnMaterialCard } from '@/entities/learn-materials';
 import type { LearnMaterialCardDto } from '@/entities/learn-materials/dtos/learn-material-card.dto';
 import { UserActionButton } from '@/features/user-actions/ui/UserActionButton';
@@ -21,10 +21,10 @@ export const LearnMaterialActions = ({
   closePopover,
 }: LearnMaterialActionsProps) => {
   const navigate = useNavigate();
-  const { mutateAsync, isPending } = useDeleteLearnMaterials();
+  const { deleteLearnMaterial, isPending } = useAdminDeleteLearnMaterials();
 
   const handleDelete = () => {
-    mutateAsync(learnMaterial.id).then(() => {
+    deleteLearnMaterial(learnMaterial.id).then(() => {
       closePopover();
     });
   };
