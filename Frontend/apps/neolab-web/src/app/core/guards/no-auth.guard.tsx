@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
 export const NoAuthGuard = () => {
-  const login = useAuth(state => state.login);
-  const isAuthorized = useAuth(state => state.isAuthorized);
+  const login = useAuth((state) => state.login);
+  const isAuthorized = useAuth((state) => state.isAuthorized);
 
   useEffect(() => {
     if (tokenService.hasValue()) {

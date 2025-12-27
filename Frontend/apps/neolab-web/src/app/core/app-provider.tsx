@@ -1,13 +1,12 @@
 import { BrowserRouter } from 'react-router-dom';
 import { Suspense } from 'react';
 import { HeroUIProvider } from '@heroui/react';
-import { ErrorProvider } from './ErrorProvider';
-import { QueryProvider } from './QueryProvider';
 import { NuqsAdapter } from 'nuqs/adapters/react';
 import { ToastProvider } from '@heroui/toast';
 import { Spinner } from '@/shared/ui';
+import { ErrorProvider, QueryProvider } from './providers';
 
-export const Provider = ({ children }: { children: React.ReactNode }) => {
+export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <ErrorProvider>
       <HeroUIProvider>

@@ -3,12 +3,12 @@ import { PageScrollbar } from '@/shared/ui';
 import { Header } from '@/widgets/header';
 import { Outlet } from 'react-router-dom';
 
-const AppLayout = () => {
+export const AppLayout = () => {
   return (
     <PageScrollbar>
-      <div className='min-h-svh'>
+      <div className="min-h-svh">
         <Header />
-        <div className='container'>
+        <div className="container">
           <Outlet />
         </div>
       </div>
@@ -17,5 +17,3 @@ const AppLayout = () => {
     </PageScrollbar>
   );
 };
-
-export default AppLayout;

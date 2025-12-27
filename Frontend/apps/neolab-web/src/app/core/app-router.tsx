@@ -12,9 +12,9 @@ import {
 import { AuthGuard, NoAuthGuard } from './guards';
 import { useRoutes } from 'react-router-dom';
 import { NotFoundPage } from '@/pages/Error';
-import { AdminGuard } from './guards/AdminGuard';
+import { AdminGuard } from './guards';
 
-const AppLayout = lazy(() => import('./AppLayout'));
+const AppLayout = lazy(() => import('./app-layout').then((m) => ({ default: m.AppLayout })));
 
 const routes = [
   {
