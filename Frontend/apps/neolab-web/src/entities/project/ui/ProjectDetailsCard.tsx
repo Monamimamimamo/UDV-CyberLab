@@ -3,6 +3,7 @@ import type { ProjectDTO } from '../model/dto/ProjectDTO';
 import { ProjectStats } from './ProjectStats';
 import { useSuspenseProjectFiles } from '../api/queries/useProjectFiles';
 import { Rating } from '@/shared/ui';
+import { IoIosArrowForward } from 'react-icons/io';
 
 export const ProjectDetailsCard = ({ project }: { project: ProjectDTO }) => {
   const {
@@ -62,14 +63,21 @@ export const ProjectDetailsCard = ({ project }: { project: ProjectDTO }) => {
           <li>
             <a
               onClick={() => onFileDownload(project.name)}
-              className="cursor-pointer hover:underline"
+              className="group mt-1 flex cursor-pointer items-center font-semibold text-blue-500 transition hover:text-blue-500/80"
             >
-              Скачать документацию
+              <span>Скачать документацию</span>
+              <IoIosArrowForward className="transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </li>
           <li>
-            <a href={project.landingURL} target="_blank" className="cursor-pointer hover:underline">
-              Демонстрация проекта
+            <a
+              href={project.landingURL}
+              target="_blank"
+              className="group mt-1 flex cursor-pointer items-center font-semibold text-blue-500 transition hover:text-blue-500/80"
+              rel="noreferrer"
+            >
+              <span> Демонстрация проекта</span>
+              <IoIosArrowForward className="transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </li>
         </ul>

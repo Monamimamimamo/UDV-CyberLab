@@ -1,9 +1,9 @@
-import { useSuspenseLearnMaterialDetails } from '@/entities/learn-materials';
-import { BackButton } from '@/shared/ui';
-import { LearnMaterialCommentForm } from '@/widgets/learn-material-comment-form';
-import { LearnMaterialComments } from '@/widgets/learn-material-comments';
-import { LearnMaterialDetails } from '@/widgets/learn-materials-details';
 import { useParams } from 'react-router-dom';
+import { useSuspenseLearnMaterialDetails } from '@/entities/learn-materials';
+import { CommentForm } from '@/features/comment-form';
+import { BackButton } from '@/shared/ui';
+import { Comments } from '@/widgets/comments';
+import { LearnMaterialDetails } from '@/widgets/learn-materials-details';
 
 const LearnMaterialsPreviewPage = () => {
   const { materialId = '' } = useParams();
@@ -17,9 +17,9 @@ const LearnMaterialsPreviewPage = () => {
       <div className="flex w-full flex-col gap-4">
         <LearnMaterialDetails details={data} />
         <div className="flex w-full flex-col gap-2">
-          <LearnMaterialCommentForm materialId={data.id} />
+          <CommentForm entityId={data.id} entityKey="learn-materials" />
         </div>
-        <LearnMaterialComments materialId={data.id} />
+        <Comments entityId={data.id} entityKey="learn-materials" />
       </div>
     </section>
   );

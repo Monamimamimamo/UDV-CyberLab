@@ -1,6 +1,8 @@
 import { type DependencyList, useRef, useEffect } from 'react';
 
-export const useKeyDown = (key: string, handler: () => void, deps?: DependencyList): void => {
+type Keydown = 'Enter' | 'Escape';
+
+export const useKeyDown = (key: Keydown, handler: () => void, deps?: DependencyList): void => {
   const callbackRef = useRef(handler);
 
   useEffect(() => {
