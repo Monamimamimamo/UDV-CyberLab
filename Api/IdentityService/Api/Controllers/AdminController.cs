@@ -8,7 +8,7 @@ namespace Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize(Roles = "ADMIN")]
+//[Authorize(Roles = "ADMIN")]
 public class AdminController : ControllerBase
 {
     private readonly IAdminService _adminService;
@@ -42,44 +42,20 @@ public class AdminController : ControllerBase
         }).ToList();
     }
 
-    [HttpPost("addToRole")]
-    public async Task<IActionResult> AddToRole([FromBody] RoleChangeRequest request)
+    [HttpPost("changeRole")]
+    public async Task<IActionResult> ChangeRole([FromBody] RoleChangeRequest request)
     {
         var user = await _userService.GetUserInfoAsync(request.UserId);
         if (user is null)
         {
             return BadRequest(new { Message = "Нет такого пользователя." });
         }
-
+        await _userService.RemoveFromRoleAsync(user, user.Role.ToString());
         var result = await _userService.AddToRoleAsync(user, request.Role);
 
         if (result.Succeeded)
         {
-            return Ok(new { Message = $"Роль {request.Role} добавлена к пользователю {user.UserName}" });
-        }
-
-        foreach (var error in result.Errors)
-        {
-            ModelState.AddModelError(string.Empty, error.Description);
-        }
-
-        return BadRequest(ModelState);
-    }
-
-    [HttpPost("removeFromRole")]
-    public async Task<IActionResult> RemoveFromRole([FromBody] RoleChangeRequest request)
-    {
-        var user = await _userService.GetUserInfoAsync(request.UserId);
-        if (user is null)
-        {
-            return BadRequest(new { Message = "Нет такого пользователя." });
-        }
-
-        var result = await _userService.RemoveFromRoleAsync(user, request.Role);
-
-        if (result.Succeeded)
-        {
-            return Ok(new { Message = $"Роль {request.Role} убрана у пользователя {user.UserName}" });
+            return Ok(new { Message = $"Роль пользователя {user.UserName} изменена с {user.Role} на {request.Role}" });
         }
 
         foreach (var error in result.Errors)
