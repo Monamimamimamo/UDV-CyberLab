@@ -10,5 +10,5 @@ public class UserInfoResponse
     
     public string Email { get; set; }
     
-    public UserRole Role { get; set; }
+    public List<UserRole> Roles { get; set; }
 }

@@ -8,7 +8,7 @@ namespace Domain.Entities
     public class User : IdentityUser<Guid>
     {
         [NotMapped]
-        public UserRole Role { get; set; }
+        public List<UserRole> Roles { get; set; }
 
         public async Task<IdentityResult> CreateAsync(IUserStore userManager, string password, string userRole)
         {

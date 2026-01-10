@@ -33,7 +33,7 @@ public class UserController : ControllerBase
             UserId = userId,
             UserName = result.UserName,
             Email = result.Email,
-            Role = result.Role
+            Roles = result.Roles
         });
     }
 }
