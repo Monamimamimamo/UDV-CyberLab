@@ -7,7 +7,7 @@ namespace Api.Controllers
     {
         [Route("api/[controller]")]
         [ApiController]
-        public class FilesController(IFileManager _fileManager) : ControllerBase
+        public class TestFilesController(IFileManager _fileManager) : ControllerBase
         {
             [HttpGet("file")]
             public async Task<IActionResult> GetFile(Guid id)

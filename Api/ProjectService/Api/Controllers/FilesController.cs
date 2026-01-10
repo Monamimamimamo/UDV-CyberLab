@@ -6,7 +6,7 @@ namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FilesController(IProjectService _projectService) : ControllerBase
+    public class ProjectFilesController(IProjectService _projectService) : ControllerBase
     {
 
         [HttpGet("{id}/files")]
