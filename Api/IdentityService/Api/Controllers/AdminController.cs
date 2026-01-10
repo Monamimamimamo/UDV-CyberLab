@@ -38,7 +38,7 @@ public class AdminController : ControllerBase
             UserId = user.Id,
             UserName = user.UserName,
             Email = user.Email,
-            Roles = user.Roles
+            Role = user.Role
         }).ToList();
     }
 

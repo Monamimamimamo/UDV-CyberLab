@@ -81,14 +81,12 @@ public class UserRepository : IUserStore
             return null;
         }
 
-        var rolesString = (await _userManager.GetRolesAsync(user)).ToList();
-        foreach (var roleString in rolesString)
+        var roleString = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+
+        if (roleString != null && roleString != UserRole.USER.ToString() &&
+            Enum.TryParse<UserRole>(roleString, out var parsedRole))
         {
-            if (roleString != null && roleString != UserRole.USER.ToString() &&
-                Enum.TryParse<UserRole>(roleString, out var parsedRole))
-            {
-                user.Roles.Add(parsedRole);
-            }
+            user.Role = parsedRole;
         }
 
         return user;
@@ -134,7 +132,7 @@ public class UserRepository : IUserStore
                 Id = u.Id,
                 UserName = u.UserName,
                 Email = u.Email,
-                Roles = _dbContext.UserRoles.Where(ur => ur.UserId == u.Id).Join(
+                Role = _dbContext.UserRoles.Where(ur => ur.UserId == u.Id).Join(
                         _dbContext.Roles,
                         ur => ur.RoleId,
                         r => r.Id,
@@ -144,7 +142,7 @@ public class UserRepository : IUserStore
                         roleName == nameof(UserRole.TEACHER) ? UserRole.TEACHER :
                         UserRole.USER
                     )
-                    .ToList()
+                    .FirstOrDefault()
             });
 
         if (!string.IsNullOrWhiteSpace(name)) query = query.Where(u => EF.Functions.ILike(u.UserName, $"%{name}%"));
@@ -160,7 +158,7 @@ public class UserRepository : IUserStore
                 Id = u.Id,
                 UserName = u.UserName,
                 Email = u.Email,
-                Roles = _dbContext.UserRoles.Where(ur => ur.UserId == u.Id).Join(
+                Role = _dbContext.UserRoles.Where(ur => ur.UserId == u.Id).Join(
                         _dbContext.Roles,
                         ur => ur.RoleId,
                         r => r.Id,
@@ -169,7 +167,8 @@ public class UserRepository : IUserStore
                         roleName == nameof(UserRole.ADMIN) ? UserRole.ADMIN :
                         roleName == nameof(UserRole.TEACHER) ? UserRole.TEACHER :
                         UserRole.USER
-                    ).ToList()
+                    )
+                    .FirstOrDefault()
             })
             .ToListAsync();
 
