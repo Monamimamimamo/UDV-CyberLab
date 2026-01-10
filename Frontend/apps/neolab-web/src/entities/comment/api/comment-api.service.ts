@@ -23,4 +23,7 @@ export class CommentApiService {
 
   public delete = async (commentId: string): Promise<boolean> =>
     await axiosClient.delete(`${this.baseHref}/${commentId}`);
+
+  public deleteAsAdmin = async (commentId: string): Promise<boolean> =>
+    await axiosClient.delete(`${this.baseHref}/admin/${commentId}`);
 }

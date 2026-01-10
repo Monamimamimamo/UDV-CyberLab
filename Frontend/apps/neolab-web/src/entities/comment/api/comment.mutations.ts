@@ -49,3 +49,19 @@ export const useDeleteComment = (apiKey: CommentKeys) => {
 
   return { deleteComment: mutateAsync, ...rest };
 };
+
+
+export const useDeleteCommentAsAdmin = (apiKey: CommentKeys) => {
+  const queryClient = useQueryClient();
+
+  const api = useMemo(() => commentServices[apiKey], [apiKey]);
+
+  const { mutateAsync, ...rest } = useMutation({
+    ...commentConfig.deleteCommentAsAdmin(api),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [api.key] });
+    },
+  });
+
+  return { deleteComment: mutateAsync, ...rest };
+};

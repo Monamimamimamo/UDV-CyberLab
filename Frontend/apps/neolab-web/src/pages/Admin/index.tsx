@@ -1,7 +1,7 @@
 import type { RouteObject } from 'react-router-dom';
 import { AdminLayout } from './layouts/AdminLayout';
-import { DevelopmentPage } from '../Error';
 import {
+  TestsPage,
   LearnMaterialsCreatePage,
   LearnMaterialsEditPage,
   LearnMaterialsPage,
@@ -32,7 +32,7 @@ export const adminRoutes: RouteObject[] = [
       },
       {
         path: '/admin/tests',
-        element: <DevelopmentPage />,
+        element: <TestsPage />,
       },
       {
         path: '/admin',

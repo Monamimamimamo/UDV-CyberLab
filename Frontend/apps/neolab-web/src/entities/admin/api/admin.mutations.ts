@@ -44,19 +44,6 @@ export const useAdminDeleteUser = () => {
   return { deleteUser: mutateAsync, ...rest };
 };
 
-export const useAdminDeleteProjectComment = () => {
-  const queryClient = useQueryClient();
-
-  const { mutateAsync, ...rest } = useMutation({
-    ...adminConfig.deleteProjectComment(),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['project-comments'] });
-    },
-  });
-
-  return { deleteProjectComment: mutateAsync, ...rest };
-};
-
 export const useAdminDeleteProject = () => {
   const queryClient = useQueryClient();
 

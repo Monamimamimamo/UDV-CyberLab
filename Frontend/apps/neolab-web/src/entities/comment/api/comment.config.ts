@@ -28,9 +28,17 @@ export const deleteComment = (api: CommentApiService) =>
     mutationFn: api.delete,
   });
 
+
+export const deleteCommentAsAdmin = (api: CommentApiService) =>
+  mutationOptions({
+    mutationKey: [`${api.key}/delete-as-admin`],
+    mutationFn: api.deleteAsAdmin,
+  });
+
 export const commentConfig = {
   getComments,
   createComment,
   updateComment,
   deleteComment,
+  deleteCommentAsAdmin,
 };

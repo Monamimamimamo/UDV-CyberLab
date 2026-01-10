@@ -12,3 +12,5 @@ export const LearnMaterialsPage = lazy(() => import('./LearnMaterialsPage'));
 export const LearnMaterialsPreviewPage = lazy(() => import('./LearnMaterialsPreviewPage'));
 export const LearnMaterialsCreatePage = lazy(() => import('./LearnMaterialsCreatePage'));
 export const LearnMaterialsEditPage = lazy(() => import('./LearnMaterialsEditPage'));
+
+export const TestsPage = lazy(() => import('./TestsPage'));
