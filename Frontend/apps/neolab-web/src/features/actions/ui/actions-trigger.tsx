@@ -29,6 +29,7 @@ export const ActionsTrigger = ({ children }: ActionsTriggerProps) => {
   return (
     <Popover
       radius="sm"
+      showArrow
       placement="bottom-end"
       classNames={{ content: 'p-1 overflow-hidden bg-white' }}
       isOpen={open}

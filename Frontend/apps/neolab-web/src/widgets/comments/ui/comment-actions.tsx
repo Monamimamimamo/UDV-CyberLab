@@ -1,5 +1,4 @@
-import { useAdminDeleteProjectComment } from '@/entities/admin';
-import { type Comment, useDeleteComment } from '@/entities/comment';
+import { type Comment, useDeleteComment, useDeleteCommentAsAdmin } from '@/entities/comment';
 import { Divider } from '@heroui/react';
 import { MdDelete, MdModeEdit } from 'react-icons/md';
 import { useCommentsContext } from '../model/comments-provider';
@@ -48,13 +47,14 @@ const OwnerActions = ({ comment, onEdit }: ActionsProps) => {
 };
 
 const AdminActions = ({ comment }: ActionsProps) => {
-  const { deleteProjectComment, isPending } = useAdminDeleteProjectComment();
+  const { entityKey } = useCommentsContext();
+  const { deleteComment, isPending } = useDeleteCommentAsAdmin(entityKey);
 
   return (
     <div>
       <ActionButton
         size="sm"
-        onPress={() => deleteProjectComment(comment.id)}
+        onPress={() => deleteComment(comment.id)}
         disabled={isPending}
         isLoading={isPending}
         startContent={isPending ? null : <MdDelete size={17} />}

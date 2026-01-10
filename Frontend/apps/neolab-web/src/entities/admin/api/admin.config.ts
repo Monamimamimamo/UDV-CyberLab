@@ -33,17 +33,10 @@ export const deleteProject = () =>
     mutationFn: adminApiService.deleteProject,
   });
 
-export const deleteProjectComment = () =>
-  mutationOptions({
-    mutationKey: ['project-comment/delete'],
-    mutationFn: adminApiService.deleteProjectComment,
-  });
-
 export const adminConfig = {
   getUsersList,
   deleteLearnMaterial,
   deleteNews,
   deleteUser,
   deleteProject,
-  deleteProjectComment,
 };
