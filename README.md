@@ -77,11 +77,15 @@ cd UDV-CyberLab/Frontend
 # Собираем образ локально
 docker build -t frontend .
 
+# Или чеоез Dokcer-compose
+sudo apt install docker-compose
+docker compose up -d --build
+
 # Или используем готовый образ из Docker Hub
 docker pull monamimamimamo/udv_frontend:latest
 ```
 
-### 4. Запуск контейнера
+### 4. Запуск контейнера (если не запустили через docker compose)
 ```bash
 # Запускаем контейнер в фоновом режиме на порту 4173
 docker run -d -p 4173:4173 --name neolab-frontend --restart unless-stopped monamimamimamo/udv_frontend:latest
