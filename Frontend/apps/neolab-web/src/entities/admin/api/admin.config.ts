@@ -27,6 +27,12 @@ export const deleteUser = () =>
     mutationFn: adminApiService.deleteUser,
   });
 
+export const changeUserRole = () =>
+  mutationOptions({
+    mutationKey: ['user/change-role'],
+    mutationFn: adminApiService.changeUserRole,
+  });
+
 export const deleteProject = () =>
   mutationOptions({
     mutationKey: ['project/delete'],
@@ -38,5 +44,6 @@ export const adminConfig = {
   deleteLearnMaterial,
   deleteNews,
   deleteUser,
+  changeUserRole,
   deleteProject,
 };

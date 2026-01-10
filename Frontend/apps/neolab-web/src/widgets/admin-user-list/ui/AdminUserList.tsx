@@ -1,4 +1,4 @@
-import type { UserInfo } from '@/shared/types';
+import { type UserInfo } from '@/shared/types';
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react';
 
 const tableClassNames = {
@@ -10,7 +10,7 @@ const tableClassNames = {
 };
 
 import { UserDeleteActions, UserDeleteActionsTrigger } from '@/features/user-actions';
-import { UserCard, UserChip } from '@/entities/user';
+import { UserCard, UserChip, useUser } from '@/entities/user';
 import { type Key, useCallback } from 'react';
 
 const columns: { name: string; key: Keys }[] = [
@@ -22,12 +22,14 @@ const columns: { name: string; key: Keys }[] = [
 type Keys = 'user' | 'role' | 'actions';
 
 export const AdminUserList = ({ users }: { users: UserInfo[] }) => {
+  const currentUser = useUser();
+
   const renderCell = useCallback(
     (user: UserInfo, columnKey: Key) =>
       ({
         user: <UserCard withoutBadge imgSize="md" user={user} />,
         role: <UserChip role={user.role} />,
-        actions: (
+        actions: currentUser?.userId !== user.userId && (
           <div className="flex w-full justify-end">
             <UserDeleteActionsTrigger>
               {(closePopover) => <UserDeleteActions user={user} closePopover={closePopover} />}
@@ -35,7 +37,7 @@ export const AdminUserList = ({ users }: { users: UserInfo[] }) => {
           </div>
         ),
       })[String(columnKey) as Keys],
-    [],
+    [currentUser],
   );
 
   return (

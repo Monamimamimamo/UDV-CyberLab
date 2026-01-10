@@ -56,3 +56,17 @@ export const useAdminDeleteProject = () => {
 
   return { deleteProject: mutateAsync, ...rest };
 };
+
+export const useAdminChangeUserRole = () => {
+  const queryClient = useQueryClient();
+
+  const { mutateAsync, ...rest } = useMutation({
+    ...adminConfig.changeUserRole(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users'] });
+      addToast({ color: 'success', title: 'Роль пользователя была успешно изменена!' });
+    },
+  });
+
+  return { changeUserRole: mutateAsync, ...rest };
+};

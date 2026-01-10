@@ -1,7 +1,10 @@
 import { useDeleteUserModal } from '@/features/user-delete-modal';
+import { useChangeUserRoleModal } from '@/features/user-change-role-modal';
 import type { UserInfo } from '@/shared/types';
 import { UserActionButton } from './UserActionButton';
 import { MdDelete } from 'react-icons/md';
+import { FaUserPen } from 'react-icons/fa6';
+import { Divider } from '@heroui/react';
 
 type CommentActionsProps = {
   user: UserInfo;
@@ -12,28 +15,29 @@ export const UserDeleteActions = ({
   user,
   closePopover,
 }: CommentActionsProps) => {
-  const { open } = useDeleteUserModal();
+  const { open: openDeleteModal } = useDeleteUserModal();
+  const { open: openChangeRoleModal } = useChangeUserRoleModal();
 
-  // const handleRoleChange = () => {
-  //   closePopover();
-  // };
+  const handleRoleChange = () => {
+    closePopover();
+    openChangeRoleModal(user);
+  };
 
   const handleUserDelete = () => {
     closePopover();
-    open(user);
+    openDeleteModal(user);
   };
 
   return (
     <div>
-      {/* <UserActionButton
+      <UserActionButton
         onPress={handleRoleChange}
-        isDisabled={true}
         size="sm"
         startContent={<FaUserPen size={17} />}
       >
-        Назначить роль
+        Сменить роль
       </UserActionButton>
-      <Divider className="my-1 bg-background" /> */}
+      <Divider className="my-1 bg-background" />
       <UserActionButton
         size="sm"
         onPress={handleUserDelete}
