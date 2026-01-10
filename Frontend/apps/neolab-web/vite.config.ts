@@ -11,5 +11,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  preview: {
+    allowedHosts: ['localhost', '.aydlioh.ru', '.udv.group'],
+  },
   plugins: [react(), tailwindcss(), svgr()],
 });
