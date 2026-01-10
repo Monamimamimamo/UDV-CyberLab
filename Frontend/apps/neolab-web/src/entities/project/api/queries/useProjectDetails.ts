@@ -1,9 +1,5 @@
-import {
-  useQuery,
-  useSuspenseQuery,
-  queryOptions,
-} from '@tanstack/react-query';
-import { projectApi } from '../services/testAPI';
+import { useQuery, useSuspenseQuery, queryOptions } from '@tanstack/react-query';
+import { projectApi } from '../services/projectAPI';
 
 const createProjectDetailsConfig = (id: string) =>
   queryOptions({
