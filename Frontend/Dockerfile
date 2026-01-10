@@ -1,6 +1,12 @@
 # Используем Node.js 22 LTS (актуальная версия)
 FROM node:22-alpine AS builder
 
+# Принимаем build argument для VITE_BACKEND_URL
+ARG VITE_BACKEND_URL=https://neolab-backend.aydlioh.ru/
+
+# Устанавливаем переменную окружения для использования во время сборки
+ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
+
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
@@ -40,9 +46,13 @@ RUN apk add --no-cache wget && \
 # Копируем собранное приложение из builder stage
 COPY --from=builder /app/apps/neolab-web/dist ./dist
 
+# Копируем конфигурационный файл для preview режима
+COPY vite.preview.config.js ./vite.preview.config.js
+
 # Expose порт для vite preview (по умолчанию 4173)
 EXPOSE 4173
 
 # Запускаем vite preview в режиме предпросмотра
 # --host 0.0.0.0 позволяет принимать подключения извне контейнера
-CMD ["vite", "preview", "--host", "0.0.0.0", "--port", "4173"]
+# --config указывает путь к конфигурационному файлу
+CMD ["vite", "preview", "--host", "0.0.0.0", "--port", "4173", "--config", "./vite.preview.config.js"]

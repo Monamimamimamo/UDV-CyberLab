@@ -232,3 +232,10 @@ _Pvt_Extensions
 .fake/
 
 .idea
+# Terraform
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+terraform/.terraform/
