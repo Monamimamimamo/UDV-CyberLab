@@ -15,6 +15,10 @@ class AdminApiService {
     return await axiosClient.delete(`/api/Admin/user/${userId}`);
   }
 
+  public async changeUserRole(body: { userId: string; role: string }): Promise<boolean> {
+    return await axiosClient.post('/api/Admin/changeRole', body);
+  }
+
   public async deleteProjectComment(commentId: string): Promise<boolean> {
     return await axiosClient.delete(`/api/Admin/comment/${commentId}`);
   }

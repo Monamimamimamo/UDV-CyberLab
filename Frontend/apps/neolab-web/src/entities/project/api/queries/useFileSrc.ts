@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { projectApi } from '../services/testAPI';
+import { projectApi } from '../services/projectAPI';
 
 export const useFileSrc = (path: string, id: string) => {
   return useSuspenseQuery({

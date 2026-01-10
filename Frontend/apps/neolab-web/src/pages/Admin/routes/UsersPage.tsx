@@ -1,4 +1,5 @@
 import { UserDeleteModal } from '@/features/user-delete-modal';
+import { UserChangeRoleModal } from '@/features/user-change-role-modal';
 import { QueryBoundary, StickySearch } from '@/shared/common/components';
 import { Spinner } from '@/shared/ui';
 import { AdminUserListWithQuery } from '@/widgets/admin-user-list';
@@ -21,6 +22,7 @@ const UsersPage = () => {
       </QueryBoundary>
 
       <UserDeleteModal />
+      <UserChangeRoleModal />
     </section>
   );
 };

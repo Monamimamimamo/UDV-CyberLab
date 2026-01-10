@@ -55,11 +55,14 @@ class LearnMaterialsApiService {
   }
 
   public async getFile(path: string): Promise<string> {
-    const base64: { item1: string; item2: string } = await axiosClient.get('/api/Files/file', {
-      params: {
-        path,
+    const base64: { item1: string; item2: string } = await axiosClient.get(
+      '/api/ProjectFiles/file',
+      {
+        params: {
+          path,
+        },
       },
-    });
+    );
 
     return createFileUrl(base64.item1, base64.item2);
   }

@@ -58,11 +58,14 @@ class ProjectApi {
   }
 
   public async getFile(path: string): Promise<string> {
-    const base64: { item1: string; item2: string } = await axiosClient.get('/api/Files/file', {
-      params: {
-        path,
+    const base64: { item1: string; item2: string } = await axiosClient.get(
+      '/api/ProjectFiles/file',
+      {
+        params: {
+          path,
+        },
       },
-    });
+    );
 
     return createFileUrl(base64.item1, base64.item2);
   }
@@ -71,7 +74,7 @@ class ProjectApi {
     const base64: ProjectFiles & {
       logoMimeType: string;
       documentationMimeType: string;
-    } = await axiosClient.get(`/api/Files/${id}/files`);
+    } = await axiosClient.get(`/api/ProjectFiles/${id}/files`);
 
     return {
       logo: createFileUrl(base64.logo, base64.logoMimeType),
