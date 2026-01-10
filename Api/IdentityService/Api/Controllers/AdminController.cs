@@ -1,4 +1,5 @@
-﻿using IdentityServerApi.Controllers.User.Request;
+﻿using Api.Controllers.User.Request;
+using IdentityServerApi.Controllers.User.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
@@ -39,5 +40,53 @@ public class AdminController : ControllerBase
             Email = user.Email,
             Role = user.Role
         }).ToList();
+    }
+
+    [HttpPost("addToRole")]
+    public async Task<IActionResult> AddToRole([FromBody] RoleChangeRequest request)
+    {
+        var user = await _userService.GetUserInfoAsync(request.UserId);
+        if (user is null)
+        {
+            return BadRequest(new { Message = "Нет такого пользователя." });
+        }
+
+        var result = await _userService.AddToRoleAsync(user, request.Role);
+
+        if (result.Succeeded)
+        {
+            return Ok(new { Message = $"Роль {request.Role} добавлена к пользователю {user.UserName}" });
+        }
+
+        foreach (var error in result.Errors)
+        {
+            ModelState.AddModelError(string.Empty, error.Description);
+        }
+
+        return BadRequest(ModelState);
+    }
+
+    [HttpPost("removeFromRole")]
+    public async Task<IActionResult> RemoveFromRole([FromBody] RoleChangeRequest request)
+    {
+        var user = await _userService.GetUserInfoAsync(request.UserId);
+        if (user is null)
+        {
+            return BadRequest(new { Message = "Нет такого пользователя." });
+        }
+
+        var result = await _userService.RemoveFromRoleAsync(user, request.Role);
+
+        if (result.Succeeded)
+        {
+            return Ok(new { Message = $"Роль {request.Role} убрана у пользователя {user.UserName}" });
+        }
+
+        foreach (var error in result.Errors)
+        {
+            ModelState.AddModelError(string.Empty, error.Description);
+        }
+
+        return BadRequest(ModelState);
     }
 }

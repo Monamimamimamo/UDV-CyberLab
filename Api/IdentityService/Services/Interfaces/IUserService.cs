@@ -17,5 +17,7 @@ namespace Services.Interfaces
         Task<string> GeneratePasswordResetTokenAsync(User user);
         Task<IdentityResult> ConfirmEmailAsync(User user, string token);
         Task<IdentityResult> ResetPasswordAsync(User user, string token, string newPassword);
+        Task<IdentityResult> AddToRoleAsync(User user, string role);
+        Task<IdentityResult> RemoveFromRoleAsync(User user, string role);
     }
 }

@@ -20,7 +20,7 @@ public class AuthorizeController(IUserService _userService,
     [HttpPost("register")]
     public async Task<ActionResult<int>> Register([FromBody] UserRegisterRequest model)
     {
-        var user = new User
+        var user = new Domain.Entities.User
         {
             UserName = model.UserName,
             Email = model.Email
@@ -50,7 +50,7 @@ public class AuthorizeController(IUserService _userService,
     [HttpPost("login")]
     public async Task<ActionResult> Login([FromBody] UserLoginRequest model)
     {
-        var token = await _userService.LoginUserAsync(new User
+        var token = await _userService.LoginUserAsync(new Domain.Entities.User
         {
             Email = model.Email
         }, model.Password);

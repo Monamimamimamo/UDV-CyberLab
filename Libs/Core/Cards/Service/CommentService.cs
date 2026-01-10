@@ -82,8 +82,21 @@ namespace Core.Cards.Service
             {
                 throw new NoAccessException("You are not authorized to delete this comment.");
             }
+
+            return await AdminDeleteAsync(commentId);
+        }
+
+        public async Task<bool> AdminDeleteAsync(Guid commentId)
+        {
+            var comment = await _commentRepository.GetByIdAsync<Comment>(commentId);
+            if (comment == null)
+            {
+                throw new NotFoundException($"Comment with id {commentId} not found.");
+            }
+
             var project = await _projectRepository.GetByIdAsync<CardEntity>(comment.CardId);
             project.CommentsCount--;
+
             await _projectRepository.UpdateAsync(project);
 
             await _commentRepository.DeleteAsync(comment);

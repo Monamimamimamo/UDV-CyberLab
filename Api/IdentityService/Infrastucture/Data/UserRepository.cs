@@ -194,4 +194,14 @@ public class UserRepository : IUserStore
     {
         return _userManager.ResetPasswordAsync(user, token, newPassword);
     }
+
+    public Task<IdentityResult> AddToRoleAsync(User user, string role)
+    {
+        return _userManager.AddToRoleAsync(user, role);
+    }
+
+    public Task<IdentityResult> RemoveFromRoleAsync(User user, string role)
+    {
+        return _userManager.RemoveFromRoleAsync(user, role);
+    }
 }

@@ -39,5 +39,12 @@ namespace Core.Cards.Controllers
             var result = await _commentService.DeleteAsync(id, userId);
             return Ok(result);
         }
+
+        [HttpDelete("admin/{id}")]
+        public async Task<IActionResult> AdminDeleteComment(Guid id)
+        {
+            var result = await _commentService.AdminDeleteAsync(id);
+            return Ok(result);
+        }
     }
 }

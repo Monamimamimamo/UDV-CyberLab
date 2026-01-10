@@ -1,6 +1,6 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Domain.Interfaces;
 
@@ -20,4 +20,6 @@ public interface IUserStore
     Task<bool> IsEmailConfirmedAsync(User user);
     Task<IdentityResult> ConfirmEmailAsync(User user, string token);
     Task<IdentityResult> ResetPasswordAsync(User user, string token, string newPassword);
+    Task<IdentityResult> AddToRoleAsync(User user, string role);
+    Task<IdentityResult> RemoveFromRoleAsync(User user, string role);
 }

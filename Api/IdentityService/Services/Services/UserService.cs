@@ -1,9 +1,9 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using Core.BasicRoles;
+﻿using Core.BasicRoles;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Services.Interfaces;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Services.Services
 {
@@ -82,6 +82,16 @@ namespace Services.Services
         {
             var user = await _userStore.CheckExistAsync(id);
             return user?.Id ?? Guid.Empty;
+        }
+
+        public Task<IdentityResult> AddToRoleAsync(User user, string role)
+        {
+            return _userStore.AddToRoleAsync(user, role);
+        }
+
+        public Task<IdentityResult> RemoveFromRoleAsync(User user, string role)
+        {
+            return _userStore.RemoveFromRoleAsync(user, role);
         }
     }
 }
