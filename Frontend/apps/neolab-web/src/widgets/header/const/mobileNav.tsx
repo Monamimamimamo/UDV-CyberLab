@@ -5,12 +5,8 @@ export const mobileNav = [
   // },
 
   {
-    label: 'Тестирование',
-    path: '/tests',
-    links: [
-      { label: 'Мои тесты', path: '/tests/my' },
-      { label: 'База тестов', path: '/tests' },
-    ],
+    label: 'Новости',
+    links: [{ label: 'Все новости', path: '/news' }],
   },
   {
     label: 'Витрина проектов',
@@ -20,12 +16,16 @@ export const mobileNav = [
     ],
   },
   {
-    label: 'Новости',
-    links: [{ label: 'Все новости', path: '/news' }],
-  },
-  {
     label: 'Учебные материалы',
     links: [{ label: 'Учебные материалы', path: '/learn-materials' }],
+  },
+  {
+    label: 'Тестирование',
+    path: '/tests',
+    links: [
+      { label: 'Мои тесты', path: '/tests/my' },
+      { label: 'База тестов', path: '/tests' },
+    ],
   },
   {
     adminOnly: true,

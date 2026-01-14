@@ -1,9 +1,9 @@
-import type { RouteObject } from 'react-router-dom';
-import { MainPage } from './routes/MainPage';
+import { Navigate, type RouteObject } from 'react-router-dom';
 
 export const mainRoutes: RouteObject[] = [
   {
     path: '/',
-    element: <MainPage />,
+    // TODO MainPage когда появится главная
+    element: <Navigate to="/news" />,
   },
 ];
