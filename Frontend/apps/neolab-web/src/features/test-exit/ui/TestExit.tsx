@@ -6,7 +6,7 @@ export const TestExit = ({ id }: { id: string }) => {
   const navigate = useNavigate();
 
   return (
-    <Card className="sm:w-[90px] w-1/2 sm:h-[70px] h-[40px] rounded-[8px] flex flex-col justify-between p-1">
+    <Card className="sm:w-[90px] w-1/2 sm:h-[70px] h-[40px] !rounded-[8px] flex flex-col justify-between p-1">
       <Button
         onPress={() => navigate(`/tests/${id}/overview`)}
         className="rounded-[8px] sm:p-0 px-6 h-full min-w-0 bg-white hover:bg-background/50"

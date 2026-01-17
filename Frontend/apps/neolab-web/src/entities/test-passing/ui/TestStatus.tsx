@@ -20,15 +20,17 @@ export const TestStatus = ({
   const questionsResolved =
     savedAnswers?.reduce((acc, answer) => acc + (answer.data ? 1 : 0), 0) ?? 0;
 
+  console.log(questionsResolved);
+
   return (
-    <Card className="sm:w-[90px] sm:h-[70px] h-[40px] w-1/2 sm:px-[6px] py-[6px] px-[15px] rounded-[8px] flex sm:flex-col flex-row sm:gap-0 gap-1 justify-between">
-      <div className="sm:w-full w-1/2">
+    <Card className="flex h-[40px] w-1/2 flex-row justify-between gap-1 !rounded-[8px] px-[15px] py-[6px] sm:h-[70px] sm:w-[90px] sm:flex-col sm:gap-0 sm:px-[6px]">
+      <div className="w-1/2 sm:w-full">
         <Progress
           aria-label="Test Progress"
           size="sm"
           radius="sm"
           classNames={{
-            indicator: 'bg-main-gradient bg-gradient-to-r h-[6px]',
+            indicator: 'bg-main-gradient h-[6px]',
             track: 'h-[6px]',
             base: 'h-[6px]',
           }}

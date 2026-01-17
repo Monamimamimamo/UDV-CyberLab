@@ -8,8 +8,8 @@ export const Card = forwardRef<
   return (
     <div
       ref={ref}
-      className={clsx('bg-white rounded-[20px]', className)}
       {...props}
+      className={clsx('bg-white rounded-[20px]', className)}
     >
       {children}
     </div>
